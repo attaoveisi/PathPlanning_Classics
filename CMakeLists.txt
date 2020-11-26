@@ -16,8 +16,7 @@ set(additional_dirs_DFS GraphSearch/DepthFirst/include)
 include_directories(${additional_dirs_DFS})
 #include_directories(${additional_dirs_BFS})
 
-
-add_executable(${PROJECT_NAME} ${sources_DFS} ${includ_DFS})
+add_executable(${PROJECT_NAME} ${sources_DFS} ${include_DFS})
 #add_executable(${PROJECT_NAME} ${sources_BFS} ${include_BFS})
 
 #install(TARGETS ${PROJECT_NAME} DESTINATION bin)
