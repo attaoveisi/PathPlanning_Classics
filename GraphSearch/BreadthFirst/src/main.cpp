@@ -24,7 +24,7 @@ int main()
 
 	int start_v = 2;
 
-	cout << "Following is Breadth First Traversal "
+	cout << "The Breadth First traversal "
 		 << "(starting from vertex " << start_v << ")" << endl; 
 	m_Graph.BFS(start_v); 
 

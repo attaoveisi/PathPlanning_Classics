@@ -13,7 +13,7 @@
 
 
 #include<iostream> 
-#include <list> 
+#include <vector> 
 
 using namespace std; 
 
@@ -29,9 +29,9 @@ private:
 	int Vertices; 
 
 	/** 
-	 * @brief Pointer to an array containing adjacency lists
+	 * @brief a vector of vectors containing adjacency lists
 	 */
-	list<int> *adjacent; 
+	vector<vector<int>> adjacent; 
 
 public: 
 
@@ -41,19 +41,24 @@ public:
 	 * @param Vertices graph size (number of vertices)
 	 */
 	Graph(int Vertices);
-	~Graph(); 
 
 	/** 
 	 * @brief function to add an edge to the graph, namely adjacent object
-	 * @param v: node v
-	 * @param w: adjacent node to v
+	 * @param from: node from
+	 * @param to: adjacent node to from
 	 */
-	void addEdge(int v, int w); 
+	void addEdge(int from, int to); 
 
 	/** 
-	 * @brief prints BFS traversal from a given source s 
+	 * @brief BFS traversal from a given source s 
 	 */
 	void BFS(int s); 
+
+	/** 
+	 * @brief prints frontier vertex  
+	 */
+	void print_quene(int vortex);
+	void print_quene();
 }; 
 
 
