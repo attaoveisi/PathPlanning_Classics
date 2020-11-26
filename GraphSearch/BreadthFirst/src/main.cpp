@@ -1,12 +1,16 @@
-/// @brief Program to print BFS traversal from a given 
-/// @brief source vertex. BFS(int s) traverses vertices 
-/// @brief reachable from s. 
+/**
+* @brief Program to print BFS traversal from a given 
+* @brief source vertex. BFS(int s) traverses vertices 
+* @brief reachable from a start node. 
+*/
 #include "BFS.hpp"
 
 /// @brief Driver program to test methods of graph class 
 int main() 
 { 
-	/// @brief Create a graph given in the above diagram 
+	/** 
+	 * @brief Create a graph given in the above diagram 
+	 */
 	int nVertices = 5;
 	Graph m_Graph(nVertices); 
 	m_Graph.addEdge(0, 1); 
