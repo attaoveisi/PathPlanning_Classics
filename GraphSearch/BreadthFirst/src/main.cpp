@@ -7,21 +7,22 @@
 int main() 
 { 
 	/// @brief Create a graph given in the above diagram 
-	Graph g(5); 
-	g.addEdge(0, 1); 
-	g.addEdge(0, 2); 
-	g.addEdge(1, 2); 
-	g.addEdge(2, 0); 
-	g.addEdge(2, 3); 
-	g.addEdge(3, 3); 
-	g.addEdge(3, 4); 
-	g.addEdge(4, 0);
+	int nVertices = 5;
+	Graph m_Graph(nVertices); 
+	m_Graph.addEdge(0, 1); 
+	m_Graph.addEdge(0, 2); 
+	m_Graph.addEdge(1, 2); 
+	m_Graph.addEdge(2, 0); 
+	m_Graph.addEdge(2, 3); 
+	m_Graph.addEdge(3, 3); 
+	m_Graph.addEdge(3, 4); 
+	m_Graph.addEdge(4, 0);
 
 	int start_v = 2;
 
 	cout << "Following is Breadth First Traversal "
 		 << "(starting from vertex " << start_v << ")" << endl; 
-	g.BFS(start_v); 
+	m_Graph.BFS(start_v); 
 
 	return 0; 
 } 
