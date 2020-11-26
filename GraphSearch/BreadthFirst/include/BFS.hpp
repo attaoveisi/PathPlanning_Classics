@@ -3,7 +3,7 @@
 
 /** 
  * @brief Program to print BFS traversal from a given 
- *  @brief source vertex. BFS(int s) traverses vertices
+ * @brief source vertex. BFS(int s) traverses vertices
  * @brief Detailed description follows here.
 
     
@@ -12,11 +12,11 @@
  */
 
 
-#include<iostream> 
+#include <iostream> 
 #include <vector> 
 
-using namespace std; 
-
+namespace forwardsearch{
+namespace BFS{
 /** 
  * @brief This class represents a directed graph using adjacency list representation
  */
@@ -31,7 +31,7 @@ private:
 	/** 
 	 * @brief a vector of vectors containing adjacency lists
 	 */
-	vector<vector<int>> adjacent; 
+	std::vector<std::vector<int>> adjacent; 
 
 public: 
 
@@ -60,6 +60,7 @@ public:
 	void print_quene(int vortex);
 	void print_quene();
 }; 
-
+} // BFS
+} // forwardsearch
 
 #endif // BFS_HPP

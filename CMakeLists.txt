@@ -5,11 +5,20 @@ set(CMAKE_BUILD_TYPE Debug)
 
 project(PathPlanning VERSION 1.1.0)
 
-set(sources GraphSearch/BreadthFirst/src/main.cpp)
-set(include GraphSearch/BreadthFirst/include/BFS.cpp GraphSearch/BreadthFirst/include/BFS.hpp)
-include_directories(GraphSearch/BreadthFirst/include)
+set(sources_DFS GraphSearch/DepthFirst/src/test_DFS.cpp)
+#set(sources_BFS GraphSearch/BreadthFirst/src/test_BFS.cpp)
+set(include_DFS GraphSearch/DepthFirst/include/DFS.cpp GraphSearch/DepthFirst/include/DFS.hpp)
+#set(include_BFS GraphSearch/BreadthFirst/include/BFS.cpp GraphSearch/BreadthFirst/include/BFS.hpp)
 
-add_executable(${PROJECT_NAME} ${sources} ${include})
+#set(additional_dirs_BFS GraphSearch/BreadthFirst/include)
+set(additional_dirs_DFS GraphSearch/DepthFirst/include)
+
+include_directories(${additional_dirs_DFS})
+#include_directories(${additional_dirs_BFS})
+
+
+add_executable(${PROJECT_NAME} ${sources_DFS} ${includ_DFS})
+#add_executable(${PROJECT_NAME} ${sources_BFS} ${include_BFS})
 
 #install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 #install(FILES main.cpp DESTINATION src)

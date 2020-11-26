@@ -1,10 +1,12 @@
 #include "BFS.hpp"
 
+namespace forwardsearch{
+namespace BFS{
 Graph::Graph(int Vertices) 
 { 
 	this->Vertices = Vertices; 
 	for(int i=0;i!=Vertices;i++){
-		adjacent.push_back(vector<int>{});
+		adjacent.push_back(std::vector<int>{});
 	}
 } 
 
@@ -19,7 +21,7 @@ void Graph::BFS(int s)
 	/** 
 	 * @brief Mark all the vertices as not visited 
 	 */
-	vector<bool> visited; 
+	std::vector<bool> visited; 
 	for(int j = 0; j < Vertices; j++){
 		visited.push_back(false);
 	} 
@@ -27,7 +29,7 @@ void Graph::BFS(int s)
 	/** 
 	 * @brief Create a queue for BFS 
 	 */
-	vector<int> queue; 
+	std::vector<int> queue; 
 
 	/** 
 	 * @brief Mark the current (start) node as visited and enqueue it 
@@ -61,9 +63,11 @@ void Graph::BFS(int s)
 } 
 
 void Graph::print_quene(int vortex){
-	cout << vortex << " "; 
+	std::cout << vortex << " "; 
 }
 
 void Graph::print_quene(){
-	cout << endl; 
+	std::cout << std::endl; 
 }
+} // BFS
+} // forwardsearch

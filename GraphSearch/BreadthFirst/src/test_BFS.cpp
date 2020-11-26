@@ -5,14 +5,18 @@
 */
 #include "BFS.hpp"
 
-/// @brief Driver program to test methods of graph class 
+/**
+ * @brief Driver program to test methods of graph class
+ * 
+ * @return int 
+ */
 int main() 
 { 
 	/** 
 	 * @brief Create a graph given in the above diagram 
 	 */
 	int nVertices = 5;
-	Graph m_Graph(nVertices); 
+	forwardsearch::BFS::Graph m_Graph(nVertices); 
 	m_Graph.addEdge(0, 1); 
 	m_Graph.addEdge(0, 2); 
 	m_Graph.addEdge(1, 2); 
@@ -24,8 +28,8 @@ int main()
 
 	int start_v = 2;
 
-	cout << "The Breadth First traversal "
-		 << "(starting from vertex " << start_v << ")" << endl; 
+	std::cout << "The Breadth First traversal "
+		 << "(starting from vertex " << start_v << ")" << std::endl; 
 	m_Graph.BFS(start_v); 
 
 	return 0; 
