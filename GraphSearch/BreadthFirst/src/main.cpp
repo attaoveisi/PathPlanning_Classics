@@ -24,8 +24,8 @@ public:
 
 
 	/// @brief function to add an edge to the graph, namely adjacent object 
-	/// @param v size
-	/// @param w size
+	/// @param v node v
+	/// @param w adjacent node to v
 	void addEdge(int v, int w); 
 
 	/// @brief prints BFS traversal from a given source s 
@@ -54,7 +54,7 @@ void Graph::BFS(int s)
 	/// @brief Create a queue for BFS 
 	list<int> queue; 
 
-	/// @brief Mark the current node as visited and enqueue it 
+	/// @brief Mark the current (start) node as visited and enqueue it 
 	visited[s] = true; 
 	queue.push_back(s); 
 
@@ -87,18 +87,20 @@ void Graph::BFS(int s)
 int main() 
 { 
 	/// @brief Create a graph given in the above diagram 
-	Graph g(4); 
+	Graph g(5); 
 	g.addEdge(0, 1); 
 	g.addEdge(0, 2); 
 	g.addEdge(1, 2); 
 	g.addEdge(2, 0); 
 	g.addEdge(2, 3); 
 	g.addEdge(3, 3); 
+	g.addEdge(3, 4); 
+	g.addEdge(4, 0);
 
 	int start_v = 2;
 
 	cout << "Following is Breadth First Traversal "
-		<< "(starting from vertex " << start_v << ")" << endl; 
+		 << "(starting from vertex " << start_v << ")" << endl; 
 	g.BFS(start_v); 
 
 	return 0; 
