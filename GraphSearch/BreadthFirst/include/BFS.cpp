@@ -6,6 +6,11 @@ Graph::Graph(int Vertices)
 	adjacent = new list<int>[Vertices]; 
 } 
 
+Graph::~Graph() 
+{ 
+	delete[] adjacent;
+}
+
 void Graph::addEdge(int v, int w) 
 { 
 	adjacent[v].push_back(w); // Add w to v’s list. 
@@ -49,4 +54,5 @@ void Graph::BFS(int s)
 			} 
 		} 
 	} 
+	delete[] visited;
 } 

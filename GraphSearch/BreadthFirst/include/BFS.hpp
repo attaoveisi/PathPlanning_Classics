@@ -20,7 +20,8 @@ public:
 	/// @brief Constructor for accessing the private ... 
 	/// @brief variable Vertices and initialization of adjacent list
 	/// @param Vertices graph size (number of vertices)
-	Graph(int Vertices); 
+	Graph(int Vertices);
+	~Graph(); 
 
 
 	/// @brief function to add an edge to the graph, namely adjacent object 
