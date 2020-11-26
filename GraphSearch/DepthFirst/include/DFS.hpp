@@ -15,33 +15,46 @@
 
 namespace forwardsearch{
 namespace DFS{
+
 /**
  * @brief Graph class represents a directed graph
  * @brief using adjacency list representation
  * 
  */
-
 class Graph {
 
 private:
+	/**
+	 * @brief number of vertices for DFS
+	 * 
+	 */
+	int n_Vertices; 
 
-	int V; // No. of vertices
+	/**
+	 * @brief Pointer to an array containing adjacency lists
+	 * 
+	 */
+	std::list<int>* adjacent;
 
-	// Pointer to an array containing
-	// adjacency lists
-	std::list<int>* adj;
-
-	// A recursive function used by DFS
+	/**
+	 * @brief A recursive function used by DFS
+	 * 
+	 */
 	void DFSUtil(int v, bool visited[]);
 
 public:
-	Graph(int V); // Constructor
-
-	// function to add an edge to graph
+	Graph(int n_Vertices); // Constructor
+ 
+	/**
+	 * @brief function to add an edge to graph
+	 * 
+	 */
 	void addEdge(int v, int w);
 
-	// DFS traversal of the vertices
-	// reachable from v
+	/**
+	 * @brief DFS traversal of the vertices reachable from v
+	 * 
+	 */
 	void DFS(int v);
 };
 } // DFS

@@ -2,43 +2,56 @@
 
 namespace forwardsearch{
 namespace DFS{
-Graph::Graph(int V)
+Graph::Graph(int n_Vertices)
 {
-	this->V = V;
-	adj = new std::list<int>[V];
+	this->n_Vertices = n_Vertices;
+	adjacent = new std::list<int>[n_Vertices];
 }
 
 void Graph::addEdge(int v, int w)
 {
-	adj[v].push_back(w); // Add w to v’s list.
+	adjacent[v].push_back(w); // Add w to v’s list.
 }
 
 void Graph::DFSUtil(int v, bool visited[])
 {
-	// Mark the current node as visited and
-	// print it
+	/**
+	 * @brief Mark the current node as visited and print it
+	 * 
+	 */
 	visited[v] = true;
 	std::cout << v << " ";
 
-	// Recur for all the vertices adjacent
-	// to this vertex
+	/**
+	 * @brief Recur for all the vertices adjacent to this vertex
+	 * 
+	 */
 	std::list<int>::iterator i;
-	for (i = adj[v].begin(); i != adj[v].end(); ++i)
+	for (i = adjacent[v].begin(); i != adjacent[v].end(); ++i)
 		if (!visited[*i])
 			DFSUtil(*i, visited);
 }
 
-// DFS traversal of the vertices reachable from v.
-// It uses recursive DFSUtil()
+/**
+ * @brief DFS traversal of the vertices reachable from v.
+ * @brief It uses recursive DFSUtil()
+ * 
+ */
 void Graph::DFS(int v)
 {
-	// Mark all the vertices as not visited
-	bool* visited = new bool[V];
-	for (int i = 0; i < V; i++)
+	/**
+	 * @brief Mark all the vertices as not visited
+	 * 
+	 */
+	bool* visited = new bool[n_Vertices];
+	for (int i = 0; i < n_Vertices; i++)
 		visited[i] = false;
 
-	// Call the recursive helper function
-	// to print DFS traversal
+	/**
+	 * @brief Call the recursive helper function
+	 * @brief to print DFS traversal
+	 * 
+	 */
 	DFSUtil(v, visited);
 }
 } //DFS
