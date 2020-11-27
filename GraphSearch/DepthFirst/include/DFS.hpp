@@ -11,7 +11,7 @@
  */
 
 #include <iostream> 
-#include <list> 
+#include <vector> 
 
 namespace forwardsearch{
 namespace DFS{
@@ -34,13 +34,13 @@ private:
 	 * @brief Pointer to an array containing adjacency lists
 	 * 
 	 */
-	std::list<int>* adjacent;
+	std::vector<std::vector<int>> adjacent;
 
 	/**
 	 * @brief A recursive function used by DFS
 	 * 
 	 */
-	void DFSUtil(int v, bool visited[]);
+	void DFSUtil(int vertex, std::vector<bool> visited);
 
 public:
 	Graph(int n_Vertices); // Constructor
@@ -49,13 +49,13 @@ public:
 	 * @brief function to add an edge to graph
 	 * 
 	 */
-	void addEdge(int v, int w);
+	void addEdge(int from, int to);
 
 	/**
 	 * @brief DFS traversal of the vertices reachable from v
 	 * 
 	 */
-	void DFS(int v);
+	void DFS();
 };
 } // DFS
 } // forwardsearch

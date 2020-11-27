@@ -16,7 +16,11 @@ int main()
 	 * @brief Create a graph given in the above diagram 
 	 */
 	int nVertices = 5;
-	forwardsearch::BFS::Graph m_Graph(nVertices); 
+	forwardsearch::BFS::Graph m_Graph(nVertices);
+
+	/** 
+	 * @brief Define the graph structure 
+	 */ 
 	m_Graph.addEdge(0, 1); 
 	m_Graph.addEdge(0, 2); 
 	m_Graph.addEdge(1, 2); 
@@ -26,6 +30,9 @@ int main()
 	m_Graph.addEdge(3, 4); 
 	m_Graph.addEdge(4, 0);
 
+	/** 
+	 * @brief Define the start node
+	 */
 	int start_v = 2;
 
 	std::cout << "The Breadth First traversal "
