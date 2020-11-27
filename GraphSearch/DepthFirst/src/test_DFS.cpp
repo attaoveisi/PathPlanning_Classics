@@ -9,7 +9,7 @@ int main()
 	/** 
 	 * @brief Create a graph given in the above diagram 
 	 */
-    int n_Vertices = 5;
+    int n_Vertices = 4;
 	forwardsearch::DFS::Graph m_Graph(n_Vertices);
 
 	/** 
@@ -21,8 +21,6 @@ int main()
 	m_Graph.addEdge(2, 0);
 	m_Graph.addEdge(2, 3);
 	m_Graph.addEdge(3, 3);
-    m_Graph.addEdge(3, 4);
-	m_Graph.addEdge(4, 1);
 
 	std::cout << "The Depth First Search (DFS) Traversal: " << std::endl;
 
