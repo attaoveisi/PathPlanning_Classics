@@ -22,11 +22,9 @@ int main()
 	m_Graph.addEdge(2, 3);
 	m_Graph.addEdge(3, 3);
     m_Graph.addEdge(3, 4);
+	m_Graph.addEdge(4, 1);
 
-    int start_v = 2;
-
-	std::cout << "The Depth First Search (DFS) Traversal"
-			" (starting from vertex " << start_v << ")" << std::endl;
+	std::cout << "The Depth First Search (DFS) Traversal: " << std::endl;
 
 	m_Graph.DFS();
 

@@ -25,7 +25,7 @@ void Graph::DFSUtil(int vertex, std::vector<bool> visited)
 	std::cout << vertex << " ";
 
 	for (auto i = adjacent[vertex].begin(); i != adjacent[vertex].end(); ++i){
-		if (!visited[*i]){
+		if (!visited.at(*i)){
 			DFSUtil(*i, visited);
 		}
 	}
@@ -33,8 +33,7 @@ void Graph::DFSUtil(int vertex, std::vector<bool> visited)
 
 /**
  * @brief DFS traversal of the vertices reachable from v.
- * @brief It uses recursive DFSUtil()
- * 
+ * It uses recursive DFSUtil()
  */
 void Graph::DFS()
 {
@@ -44,7 +43,7 @@ void Graph::DFS()
 	 */
 	std::vector<bool> visited;
 	for (int i = 0; i < n_Vertices; i++){
-		visited[i] = false;
+		visited.at(i) = false;
 	}
 
 	/**
@@ -53,7 +52,7 @@ void Graph::DFS()
 	 * 
 	 */
 	for (int i = 0; i < n_Vertices; i++){
-		if (!visited[i]){
+		if (!visited.at(i)){
 			DFSUtil(i, visited);
 		}
 	}
