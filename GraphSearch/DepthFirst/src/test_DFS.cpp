@@ -9,8 +9,8 @@ int main()
 	/** 
 	 * @brief Create a graph given in the above diagram 
 	 */
-    int nVertices = 5;
-	forwardsearch::DFS::Graph m_Graph(nVertices);
+    int n_Vertices = 5;
+	forwardsearch::DFS::Graph m_Graph(n_Vertices);
 
 	/** 
 	 * @brief Define the graph structure 

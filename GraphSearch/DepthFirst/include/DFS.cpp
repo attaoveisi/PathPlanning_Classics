@@ -5,7 +5,7 @@ namespace DFS{
 Graph::Graph(int n_Vertices)
 {
 	this->n_Vertices = n_Vertices;
-	for (int i=0; i!= n_Vertices; i++){
+	for (int i=0; i < n_Vertices; i++){
 		adjacent.push_back(std::vector<int>{});
 	}
 }
@@ -22,7 +22,7 @@ void Graph::DFSUtil(int vertex, std::vector<bool> visited)
 	 * 
 	 */
 	visited.at(vertex) = true;
-	std::cout << vertex << " ";
+	print_quene(vertex);
 
 	for (auto i = adjacent[vertex].begin(); i != adjacent[vertex].end(); ++i){
 		if (!visited.at(*i)){
@@ -43,7 +43,7 @@ void Graph::DFS()
 	 */
 	std::vector<bool> visited;
 	for (int i = 0; i < n_Vertices; i++){
-		visited.at(i) = false;
+		visited.push_back(false);
 	}
 
 	/**
@@ -56,6 +56,16 @@ void Graph::DFS()
 			DFSUtil(i, visited);
 		}
 	}
+	print_quene();
 }
+
+void Graph::print_quene(int vertex){
+	std::cout << vertex << " "; 
+}
+
+void Graph::print_quene(){
+	std::cout << std::endl; 
+}
+
 } //DFS
 } //forwardsearch

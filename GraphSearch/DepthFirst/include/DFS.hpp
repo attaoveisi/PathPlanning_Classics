@@ -56,6 +56,12 @@ public:
 	 * 
 	 */
 	void DFS();
+
+	/** 
+	 * @brief prints frontier vertex  
+	 */
+	void print_quene(int vertex);
+	void print_quene();
 };
 } // DFS
 } // forwardsearch
