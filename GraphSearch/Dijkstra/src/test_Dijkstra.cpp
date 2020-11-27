@@ -1,27 +1,17 @@
-
-
-
-
- 
+#include "Dijkstra.hpp"
 /**
- * @brief driver program to test above function
- */ 
+* @brief Program to print Dijkstra traversal from a given 
+* (single) source vertex. 
+*/
 int main() 
 { 
+	int n_Vertices = 9;
 	/**
 	 * @brief Let us create the example graph discussed above
 	 */ 
-	int Graph m_graph[V][V] = { { 0, 4, 0, 0, 0, 0, 0, 8, 0 }, 
-						{ 4, 0, 8, 0, 0, 0, 0, 11, 0 }, 
-						{ 0, 8, 0, 7, 0, 4, 0, 0, 2 }, 
-						{ 0, 0, 7, 0, 9, 14, 0, 0, 0 }, 
-						{ 0, 0, 0, 9, 0, 10, 0, 0, 0 }, 
-						{ 0, 0, 4, 14, 10, 0, 2, 0, 0 }, 
-						{ 0, 0, 0, 0, 0, 2, 0, 1, 6 }, 
-						{ 8, 11, 0, 0, 0, 0, 1, 0, 7 }, 
-						{ 0, 0, 2, 0, 0, 0, 6, 7, 0 } }; 
+	forwardsearch::Dijkstra::Graph m_graph(n_Vertices,n_Vertices);
 
-	dijkstra(m_graph, 0); 
+	m_Graph.dijkstra(m_Graph, 0); 
 
 	return 0; 
 } 

@@ -7,22 +7,22 @@ project(PathPlanning VERSION 1.1.0)
 
 #set(sources_DFS GraphSearch/DepthFirst/src/test_DFS.cpp)
 #set(sources_BFS GraphSearch/BreadthFirst/src/test_BFS.cpp)
-set(sources_Dikstra GraphSearch/Dikstra/src/test_Dikstra.cpp)
+set(sources_Dijkstra GraphSearch/Dijkstra/src/test_Dijkstra.cpp)
 #set(include_DFS GraphSearch/DepthFirst/include/DFS.cpp GraphSearch/DepthFirst/include/DFS.hpp)
 #set(include_BFS GraphSearch/BreadthFirst/include/BFS.cpp GraphSearch/BreadthFirst/include/BFS.hpp)
-set(include_Dikstra GraphSearch/Dikstra/include/Dikstra.cpp GraphSearch/Dikstra/include/Dikstra.hpp)
+set(include_Dijkstra GraphSearch/Dijkstra/include/Dijkstra.cpp GraphSearch/Dijkstra/include/Dijkstra.hpp)
 
 #set(additional_dirs_BFS GraphSearch/BreadthFirst/include)
 #set(additional_dirs_DFS GraphSearch/DepthFirst/include)
-set(additional_dirs_Dikstra GraphSearch/Dikstra/include)
+set(additional_dirs_Dijkstra GraphSearch/Dijkstra/include)
 
 #include_directories(${additional_dirs_DFS})
 #include_directories(${additional_dirs_BFS})
-include_directories(${additional_dirs_Dikstra})
+include_directories(${additional_dirs_Dijkstra})
 
 #add_executable(${PROJECT_NAME} ${sources_DFS} ${include_DFS})
 #add_executable(${PROJECT_NAME} ${sources_BFS} ${include_BFS})
-add_executable(${PROJECT_NAME} ${sources_Dikstra} ${include_Dikstra})
+add_executable(${PROJECT_NAME} ${sources_Dijkstra} ${include_Dijkstra})
 
 #install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 #install(FILES main.cpp DESTINATION src)

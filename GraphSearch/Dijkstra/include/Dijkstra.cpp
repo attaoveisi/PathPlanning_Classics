@@ -1,58 +1,67 @@
 #include "Dijkstra.hpp"
 
-int Graph::minDistance(int dist[], bool sptSet[]) 
+namespace forwardsearch{
+namespace Dijkstra{
+
+/**
+ * @brief Construct a new Graph:: Graph object
+ * 
+ * @param n_Vertices 
+ */
+Graph::Graph(int n_Vertices, int m_Vertices)
+{
+	this->n_Vertices = n_Vertices;
+	this->m_Vertices = n_Vertices;
+	for (int i=0; i < n_Vertices; i++){
+		graph.push_back(std::vector<int>(m_Vertices,0));
+	}
+}
+
+
+int Graph::minDistance(std::vector<int> dist, std::vector<bool> sptSet) 
 { 
-	// Initialize min value 
+	/**
+	 * @brief Initialize min value 
+	 * @return min_index
+	 */
 	int min = INT_MAX, min_index; 
 
-	for (int v = 0; v < n_Vertices; v++) 
-		if (sptSet[v] == false && dist[v] <= min) 
+	for (int v = 0; v < n_Vertices; v++) {
+		if (sptSet[v] == false && dist[v] <= min) {
 			min = dist[v], min_index = v; 
-
+		}
+	}
 	return min_index; 
 } 
 
-
-void Graph::printSolution(int dist[]) 
-{ 
-	printf("Vertex \t\t Distance from Source\n"); 
-	for (int i = 0; i < n_Vertices; i++) 
-		printf("%d \t\t %d\n", i, dist[i]); 
-} 
-
-
-void Graph::dijkstra(int graph[n_Vertices][n_Vertices], int src) 
+void Graph::dijkstra(int source) 
 { 
 	/**
 	 * @brief The output array. dist[i] will hold the shortest
-	 * distance from src to i
+	 * distance from source to i
+	 * Initialize all distances as INFINITE 
 	 */
-	int dist[n_Vertices]; 
+	std::vector<int> dist(INT_MAX,n_Vertices);
 
 	/**
 	 * @brief sptSet[i] will be true if vertex i is included in shortest
-	 * path tree or shortest distance from src to i is finalized
-	 */
-	bool sptSet[n_Vertices];  
-
-	/**
-	 * @brief Initialize all distances as INFINITE and stpSet[] as false
-	 */
-	for (int i = 0; i < n_Vertices; i++) 
-		dist[i] = INT_MAX, sptSet[i] = false; 
+	 * path tree or shortest distance from source to i is finalized
+	 * Initialize stpSet[] as false
+	 */  
+	std::vector<bool> sptSet(false,n_Vertices);
 
 	/**
 	 * @brief Distance of source vertex from itself is always 0
 	 */
-	dist[src] = 0; 
+	dist[source] = 0; 
 
 	/**
 	 * @brief Find shortest path for all vertices
 	 */
-	for (int count = 0; count < n_Vertices - 1; count++) { 
+	for (int i = 0; i < n_Vertices - 1; i++) { 
 		/**
 		 * @brief Pick the minimum distance vertex from the set of vertices not
-		 * yet processed. u is always equal to src in the first iteration.
+		 * yet processed. u is always equal to source in the first iteration.
 		 */
 		int u = minDistance(dist, sptSet); 
  
@@ -68,16 +77,24 @@ void Graph::dijkstra(int graph[n_Vertices][n_Vertices], int src)
  
 			/**
 			 * @brief Update dist[v] only if is not in sptSet, there is an edge from 
-			 * u to v, and total weight of path from src to v through u is 
+			 * u to v, and total weight of path from source to v through u is 
 			 * smaller than current value of dist[v] 
 			 */
 			if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX 
 				&& dist[u] + graph[u][v] < dist[v]) 
 				dist[v] = dist[u] + graph[u][v]; 
 	} 
- 
-	/**
-	 * @brief print the constructed distance array
-	 */
-	printSolution(dist); 
 } 
+
+/**
+ * @brief print the constructed distance array
+ */
+void Graph::printSolution(std::vector<int> dist){ 
+	std::cout << "Vertex" << '\t' << "Distance from Source" << std::endl; 
+	for (int i = 0; i < n_Vertices; i++){
+		std::cout << i << '\t' << dist[i] << std::endl; 
+	}	
+} 
+
+} // Dijkstra
+} // forwardsearch
