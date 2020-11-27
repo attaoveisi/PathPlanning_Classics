@@ -4,5 +4,5 @@ The search algorithms which are implemented are:
 - Breadth first
 - Depth first
 - Dijkstra 
-
-* Especial thank to Nicolai Spohrer
+_______________________________________________________________
+Especial thank to Nicolai Spohrer
