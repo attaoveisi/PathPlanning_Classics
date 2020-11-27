@@ -24,7 +24,7 @@ int main()
 	m_Graph.printGraph();
 
 	int start_node = 0; // source
-	//m_Graph.dijkstra(start_node); 
+	m_Graph.dijkstra(start_node); 
 
 	return 0; 
 } 

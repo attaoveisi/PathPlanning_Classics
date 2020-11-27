@@ -63,7 +63,7 @@ void Graph::dijkstra(int source)
 	/**
 	 * @brief Find shortest path for all vertices
 	 */
-	for (int i = 0; i < n_Vertices - 1; i++) { 
+	for (int i = 0; i < n_Vertices; i++) { 
 		/**
 		 * @brief Pick the minimum distance vertex from the set of vertices not
 		 * yet processed. u is always equal to source in the first iteration.
@@ -86,8 +86,9 @@ void Graph::dijkstra(int source)
 			 * smaller than current value of dist[v] 
 			 */
 			if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX 
-				&& dist[u] + graph[u][v] < dist[v]) 
-				dist[v] = dist[u] + graph[u][v]; 
+				&& dist[u] + graph[u][v] < dist[v]){
+					dist[v] = dist[u] + graph[u][v];
+				} 
 	} 
 } 
 
