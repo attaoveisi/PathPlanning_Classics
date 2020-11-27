@@ -105,7 +105,7 @@ void Graph::printGraph(){
 	std::cout << std::endl;
 	for (int i = 0; i<n_Vertices; i++){
 		for(int j = 0; j<m_Vertices; j++){
-			std::cout << graph[i][j] << " " << std::endl;
+			std::cout << graph[i][j] << " ";
 		}
 		std::cout << std::endl;
 	}
