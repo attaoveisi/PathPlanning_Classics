@@ -17,6 +17,11 @@ Graph::Graph(int n_Vertices, int m_Vertices)
 	}
 }
 
+void Graph::addWeights(std::vector<int> graph_raws,int raw_number){
+	for (auto i = graph_raws.begin(); i != graph_raws.end();i++){
+		graph[raw_number][*i] = graph_raws[*i];
+	}
+}
 
 int Graph::minDistance(std::vector<int> dist, std::vector<bool> sptSet) 
 { 

@@ -43,10 +43,10 @@ public:
 	Graph(int n_Vertices, int m_Vertices); // Constructor
 
 	/**
-	 * @brief Fill out data in the graph
+	 * @brief Fill out data in the graph raws
 	 * 
 	 */
-	
+	void addWeights(std::vector<int> graph_raws, int raw_number);
 
 	/**
 	 * @brief A utility function to find the vertex with minimum distance value, from
