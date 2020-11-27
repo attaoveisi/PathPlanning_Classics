@@ -5,7 +5,7 @@
 */
 int main() 
 { 
-	int n_Vertices = 9;
+	int n_Vertices = 10;
 	/**
 	 * @brief Let us create the example graph discussed above
 	 */ 
@@ -21,8 +21,10 @@ int main()
 	m_Graph.addWeights({ 8, 11, 0, 0, 0, 0, 1, 0, 7 }, 8);
 	m_Graph.addWeights({ 0, 0, 2, 0, 0, 0, 6, 7, 0 }, 9);
 
+	m_Graph.printGraph();
+
 	int start_node = 0; // source
-	m_Graph.dijkstra(start_node); 
+	//m_Graph.dijkstra(start_node); 
 
 	return 0; 
 } 

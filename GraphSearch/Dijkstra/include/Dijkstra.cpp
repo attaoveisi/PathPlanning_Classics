@@ -18,8 +18,8 @@ Graph::Graph(int n_Vertices, int m_Vertices)
 }
 
 void Graph::addWeights(std::vector<int> graph_raws,int raw_number){
-	for (auto i = graph_raws.begin(); i != graph_raws.end();i++){
-		graph[raw_number][*i] = graph_raws[*i];
+	for (int i = 0; i < graph_raws.size(); i++){
+		graph[raw_number][i] = graph_raws[i];
 	}
 }
 
@@ -100,6 +100,16 @@ void Graph::printSolution(std::vector<int> dist){
 		std::cout << i << '\t' << dist[i] << std::endl; 
 	}	
 } 
+
+void Graph::printGraph(){
+	std::cout << std::endl;
+	for (int i = 0; i<n_Vertices; i++){
+		for(int j = 0; j<m_Vertices; j++){
+			std::cout << graph[i][j] << " " << std::endl;
+		}
+		std::cout << std::endl;
+	}
+}
 
 } // Dijkstra
 } // forwardsearch

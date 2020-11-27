@@ -62,6 +62,12 @@ public:
 	void printSolution(std::vector<int> dist);
 
 	/**
+	 * @brief A utility function to print the graph
+	 * 
+	 */
+	void printGraph();
+
+	/**
 	 * @brief Function that implements Dijkstra's single source shortest path algorithm
 	 * for a graph represented using adjacency matrix representation
 	 * 
