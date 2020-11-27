@@ -31,7 +31,7 @@ private:
 	int n_Vertices; 
 
 	/**
-	 * @brief Pointer to an array containing adjacency lists
+	 * @brief Adjacent list of vectors for all vertices
 	 * 
 	 */
 	std::vector<std::vector<int>> adjacent;

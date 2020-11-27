@@ -2,6 +2,7 @@
 
 namespace forwardsearch{
 namespace DFS{
+	
 Graph::Graph(int n_Vertices)
 {
 	this->n_Vertices = n_Vertices;
@@ -39,7 +40,6 @@ void Graph::DFS()
 {
 	/**
 	 * @brief Mark all the vertices as not visited
-	 * 
 	 */
 	std::vector<bool> visited;
 	for (int i = 0; i < n_Vertices; i++){
