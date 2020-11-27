@@ -21,7 +21,7 @@ void Graph::DFSUtil(int vertex, std::vector<bool> visited)
 	 * @brief Mark the current node as visited and print it
 	 * 
 	 */
-	visited[vertex] = true;
+	visited.at(vertex) = true;
 	std::cout << vertex << " ";
 
 	for (auto i = adjacent[vertex].begin(); i != adjacent[vertex].end(); ++i){
