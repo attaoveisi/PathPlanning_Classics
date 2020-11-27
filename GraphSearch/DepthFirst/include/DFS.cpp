@@ -16,7 +16,7 @@ void Graph::addEdge(int from, int to)
 	adjacent[from].push_back(to); // Add to to from’s list.
 }
 
-void Graph::DFSUtil(int vertex, std::vector<bool> visited)
+void Graph::DFSUtil(int vertex, std::vector<bool> &visited)
 {
 	/**
 	 * @brief Mark the current node as visited and print it

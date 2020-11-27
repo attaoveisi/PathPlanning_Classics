@@ -40,7 +40,7 @@ private:
 	 * @brief A recursive function used by DFS
 	 * 
 	 */
-	void DFSUtil(int vertex, std::vector<bool> visited);
+	void DFSUtil(int vertex, std::vector<bool> &visited);
 
 public:
 	Graph(int n_Vertices); // Constructor
