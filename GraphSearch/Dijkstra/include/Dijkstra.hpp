@@ -8,10 +8,11 @@
    @date Nov 2020
  */
 
-#include <limits.h> 
+#include <limits> 
 #include <stdio.h> 
 #include <iostream>
 #include <vector>
+#include <typeinfo>
 
 namespace forwardsearch{
 namespace Dijkstra{
@@ -21,6 +22,7 @@ namespace Dijkstra{
  * @brief using weighted adjacency list representation
  * 
  */
+template<class T>
 class Graph{
 private:
 	/**
@@ -34,7 +36,7 @@ private:
 	 * @brief Graph architechture 
 	 * 
 	 */
-	std::vector<std::vector<int>> graph;
+	std::vector<std::vector<T>> graph;
 public:
 	/**
 	 * @brief explicit constructor
@@ -46,20 +48,20 @@ public:
 	 * @brief Fill out data in the graph raws
 	 * 
 	 */
-	void addWeights(std::vector<int> graph_raws, int raw_number);
+	void addWeights(std::vector<T> graph_raws, int raw_number);
 
 	/**
 	 * @brief A utility function to find the vertex with minimum distance value, from
 	 * the set of vertices not yet included in shortest path tree
 	 * 
 	 */
-	int minDistance(std::vector<int> dist, std::vector<bool> sptSet);
+	T minDistance(std::vector<T> dist, std::vector<bool> sptSet);
 
 	/**
 	 * @brief A utility function to print the constructed distance array
 	 * 
 	 */
-	void printSolution(std::vector<int> dist);
+	void printSolution(std::vector<T> dist);
 
 	/**
 	 * @brief A utility function to print the graph
@@ -73,6 +75,16 @@ public:
 	 * 
 	 */
 	void dijkstra(int source);
+
+	/**
+	 * @brief Gets two variables of template type and compares them
+	 * 
+	 * @param f1 
+	 * @param f2 
+	 * @return true 
+	 * @return false 
+	 */
+	bool templateCompare(T f1, T f2) const;
 };
 } // Dijkstra
 } // forwardsearch

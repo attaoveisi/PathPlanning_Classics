@@ -9,7 +9,7 @@ int main()
 	/**
 	 * @brief Let us create the example graph discussed above
 	 */ 
-	forwardsearch::Dijkstra::Graph m_Graph(n_Vertices,n_Vertices);
+	forwardsearch::Dijkstra::Graph<int> m_Graph(n_Vertices,n_Vertices);
 	m_Graph.addWeights({ 0, 4, 0, 0, 0, 0, 0, 8, 0 }, 0);
 	m_Graph.addWeights({ 4, 0, 8, 0, 0, 0, 0, 11, 0 }, 1);
 	m_Graph.addWeights({ 0, 8, 0, 7, 0, 4, 0, 0, 2 }, 2);
