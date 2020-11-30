@@ -8,7 +8,7 @@ namespace Dijkstra{
  * 
  * @param n_Vertices 
  */
-template<class T>
+template <class T>
 Graph<T>::Graph(const int n_Vertices, const int m_Vertices):
 n_Vertices{ n_Vertices}, m_Vertices { m_Vertices}
 {
@@ -19,14 +19,14 @@ n_Vertices{ n_Vertices}, m_Vertices { m_Vertices}
 	}
 }
 
-template<class T>
+template <class T>
 void Graph<T>::addWeights(std::vector<T> graph_raws,int raw_number){
 	for (int i = 0; i < graph_raws.size(); i++){
 		graph.at(raw_number).at(i) = graph_raws.at(i);
 	}
 }
 
-template<class T>
+template <class T>
 T Graph<T>::minDistance(std::vector<T> dist, std::vector<bool> sptSet) 
 { 
 	/**
@@ -45,7 +45,7 @@ T Graph<T>::minDistance(std::vector<T> dist, std::vector<bool> sptSet)
 	return min_index; 
 } 
 
-template<class T>
+template <class T>
 void Graph<T>::dijkstra(int source) 
 { 
 	/**
@@ -104,7 +104,7 @@ void Graph<T>::dijkstra(int source)
 /**
  * @brief print the constructed distance array
  */
-template<class T>
+template <class T>
 void Graph<T>::printSolution(std::vector<T> dist){ 
 	std::cout << std::endl;
 	std::cout << "Distant array is constructed as:" << std::endl;
@@ -114,7 +114,7 @@ void Graph<T>::printSolution(std::vector<T> dist){
 	}	
 } 
 
-template<class T>
+template <class T>
 void Graph<T>::printGraph(){
 	std::cout << "The graph structure is given as: " << std::endl;
 	for (int i = 0; i<n_Vertices; i++){
@@ -125,7 +125,7 @@ void Graph<T>::printGraph(){
 	}
 }
 
-template<class T>
+template <class T>
 bool Graph<T>::templateCompare(T t1, T t2) const
 {
 	if(*(typeid(t1).name()) == 'i'){
