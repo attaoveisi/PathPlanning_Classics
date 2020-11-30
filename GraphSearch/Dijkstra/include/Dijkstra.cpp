@@ -8,10 +8,11 @@ namespace Dijkstra{
  * 
  * @param n_Vertices 
  */
-Graph::Graph(const int n_Vertices, const int m_Vertices)
+Graph::Graph(const int n_Vertices, const int m_Vertices):
+n_Vertices{ n_Vertices}, m_Vertices { m_Vertices}
 {
-	this->n_Vertices = n_Vertices;
-	this->m_Vertices = n_Vertices;
+	//this->n_Vertices = n_Vertices;
+	//this->m_Vertices = n_Vertices;
 	for (int i=0; i < n_Vertices; i++){
 		graph.push_back(std::vector<int>(m_Vertices,0));
 	}

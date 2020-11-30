@@ -27,8 +27,8 @@ private:
 	 * @brief number of vertices for DFS in the graph
 	 * 
 	 */
-	int n_Vertices;
-	int m_Vertices;
+	const int n_Vertices;
+	const int m_Vertices;
 
 	/**
 	 * @brief Graph architechture 
@@ -40,7 +40,7 @@ public:
 	 * @brief explicit constructor
 	 * 
 	 */
-	Graph(int n_Vertices, int m_Vertices); // Constructor
+	Graph(const int n_Vertices, const int m_Vertices); // Constructor
 
 	/**
 	 * @brief Fill out data in the graph raws
