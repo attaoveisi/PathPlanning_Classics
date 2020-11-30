@@ -10,6 +10,7 @@ int main()
 	/**
 	 * @brief Let us create the example graph discussed above
 	 */ 
+	/*
 	forwardsearch::Dijkstra::Graph<int> m_Graph(n_Vertices,n_Vertices);
 	m_Graph.addWeights({ 0, 4, 0, 0, 0, 0, 0, 8, 0 }, 0);
 	m_Graph.addWeights({ 4, 0, 8, 0, 0, 0, 0, 11, 0 }, 1);
@@ -20,6 +21,18 @@ int main()
 	m_Graph.addWeights({ 0, 0, 0, 0, 0, 2, 0, 1, 6 }, 6);
 	m_Graph.addWeights({ 8, 11, 0, 0, 0, 0, 1, 0, 7 }, 7);
 	m_Graph.addWeights({ 0, 0, 2, 0, 0, 0, 6, 7, 0 }, 8);
+	*/
+
+	forwardsearch::Dijkstra::Graph<float> m_Graph(n_Vertices,n_Vertices);
+	m_Graph.addWeights({ 0.0, 4.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.0, 0 }, 0);
+	m_Graph.addWeights({ 4.0, 0.0, 8.0, 0.0, 0.0, 0.0, 0.0, 11.0, 0 }, 1);
+	m_Graph.addWeights({ 0.0, 8.0, 0.0, 7.0, 0.0, 4.0, 0.0, 0.0, 2 }, 2);
+	m_Graph.addWeights({ 0.0, 0.0, 7.0, 0.0, 9.0, 14.0, 0.0, 0.0, 0 }, 3);
+	m_Graph.addWeights({ 0.0, 0.0, 0.0, 9.0, 0.0, 10.0, 0.0, 0.0, 0 }, 4);
+	m_Graph.addWeights({ 0.0, 0.0, 4.0, 14.0, 10.0, 0.0, 2.0, 0.0, 0 }, 5);
+	m_Graph.addWeights({ 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 1.0, 6 }, 6);
+	m_Graph.addWeights({ 8.0, 11.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 7 }, 7);
+	m_Graph.addWeights({ 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 6.0, 7.0, 0 }, 8);
 
 	m_Graph.printGraph();
 

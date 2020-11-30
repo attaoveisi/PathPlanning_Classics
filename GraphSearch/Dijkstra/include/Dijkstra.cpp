@@ -53,7 +53,7 @@ void Graph<T>::dijkstra(int source)
 	 * distance from source to i
 	 * Initialize all distances as INFINITE 
 	 */
-	std::vector<int> dist(n_Vertices,std::numeric_limits<T>::max());
+	std::vector<T> dist(n_Vertices,std::numeric_limits<T>::max());
 
 	/**
 	 * @brief Distance of source vertex from itself is always 0
