@@ -8,7 +8,7 @@ namespace Dijkstra{
  * 
  * @param n_Vertices 
  */
-Graph::Graph(int n_Vertices, int m_Vertices)
+Graph::Graph(const int n_Vertices, const int m_Vertices)
 {
 	this->n_Vertices = n_Vertices;
 	this->m_Vertices = n_Vertices;
@@ -19,7 +19,7 @@ Graph::Graph(int n_Vertices, int m_Vertices)
 
 void Graph::addWeights(std::vector<int> graph_raws,int raw_number){
 	for (int i = 0; i < graph_raws.size(); i++){
-		graph[raw_number][i] = graph_raws[i];
+		graph.at(raw_number).at(i) = graph_raws.at(i);
 	}
 }
 
@@ -32,8 +32,9 @@ int Graph::minDistance(std::vector<int> dist, std::vector<bool> sptSet)
 	int min = INT_MAX, min_index; 
 
 	for (int v = 0; v < n_Vertices; v++) {
-		if (sptSet[v] == false && dist[v] <= min) {
-			min = dist[v], min_index = v; 
+		if (sptSet.at(v) == false && dist.at(v) <= min) {
+			min = dist.at(v);
+			min_index = v; 
 		}
 	}
 	return min_index; 
@@ -46,19 +47,19 @@ void Graph::dijkstra(int source)
 	 * distance from source to i
 	 * Initialize all distances as INFINITE 
 	 */
-	std::vector<int> dist(INT_MAX,n_Vertices);
+	std::vector<int> dist(n_Vertices,INT_MAX);
+
+	/**
+	 * @brief Distance of source vertex from itself is always 0
+	 */
+	dist.at(source) = 0;
 
 	/**
 	 * @brief sptSet[i] will be true if vertex i is included in shortest
 	 * path tree or shortest distance from source to i is finalized
 	 * Initialize stpSet[] as false
 	 */  
-	std::vector<bool> sptSet(false,n_Vertices);
-
-	/**
-	 * @brief Distance of source vertex from itself is always 0
-	 */
-	dist[source] = 0; 
+	std::vector<bool> sptSet(n_Vertices,false); 
 
 	/**
 	 * @brief Find shortest path for all vertices
@@ -69,11 +70,12 @@ void Graph::dijkstra(int source)
 		 * yet processed. u is always equal to source in the first iteration.
 		 */
 		int u = minDistance(dist, sptSet); 
+		//std::cout << u << std::endl; debug command
  
 		/**
 		 * @brief Mark the picked vertex as processed
 		 */
-		sptSet[u] = true; 
+		sptSet.at(u) = true; 
 
 		/**
 		 * @brief Update dist value of the adjacent vertices of the picked vertex.
@@ -85,28 +87,31 @@ void Graph::dijkstra(int source)
 			 * u to v, and total weight of path from source to v through u is 
 			 * smaller than current value of dist[v] 
 			 */
-			if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX 
-				&& dist[u] + graph[u][v] < dist[v]){
-					dist[v] = dist[u] + graph[u][v];
+			if (!sptSet.at(v) && graph.at(u).at(v) && dist.at(u) != INT_MAX 
+				&& dist.at(u) + graph.at(u).at(v) < dist.at(v)){
+					dist.at(v) = dist.at(u) + graph.at(u).at(v);
 				} 
 	} 
+	printSolution(dist);
 } 
 
 /**
  * @brief print the constructed distance array
  */
 void Graph::printSolution(std::vector<int> dist){ 
+	std::cout << std::endl;
+	std::cout << "Distant array is constructed as:" << std::endl;
 	std::cout << "Vertex" << '\t' << "Distance from Source" << std::endl; 
 	for (int i = 0; i < n_Vertices; i++){
-		std::cout << i << '\t' << dist[i] << std::endl; 
+		std::cout << i << '\t' << dist.at(i) << std::endl; 
 	}	
 } 
 
 void Graph::printGraph(){
-	std::cout << std::endl;
+	std::cout << "The graph structure is given as: " << std::endl;
 	for (int i = 0; i<n_Vertices; i++){
 		for(int j = 0; j<m_Vertices; j++){
-			std::cout << graph[i][j] << " ";
+			std::cout << graph.at(i).at(j) << " ";
 		}
 		std::cout << std::endl;
 	}
