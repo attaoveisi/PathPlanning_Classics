@@ -1,4 +1,5 @@
 #include "Dijkstra.hpp"
+#include "Dijkstra.cpp"
 /**
 * @brief Program to print Dijkstra traversal from a given 
 * (single) source vertex. 
@@ -10,7 +11,7 @@ int main()
 	 * @brief Let us create the example graph discussed above
 	 */ 
 	forwardsearch::Dijkstra::Graph<float> m_Graph(n_Vertices,n_Vertices);
-	/*m_Graph.addWeights({ 0, 4, 0, 0, 0, 0, 0, 8, 0 }, 0);
+	m_Graph.addWeights({ 0, 4, 0, 0, 0, 0, 0, 8, 0 }, 0);
 	m_Graph.addWeights({ 4, 0, 8, 0, 0, 0, 0, 11, 0 }, 1);
 	m_Graph.addWeights({ 0, 8, 0, 7, 0, 4, 0, 0, 2 }, 2);
 	m_Graph.addWeights({ 0, 0, 7, 0, 9, 14, 0, 0, 0 }, 3);
@@ -24,7 +25,6 @@ int main()
 
 	int start_node = 0; // source
 	m_Graph.dijkstra(start_node); 
-	*/
 
 	return 0; 
 } 
