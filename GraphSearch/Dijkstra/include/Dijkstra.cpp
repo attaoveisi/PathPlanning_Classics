@@ -93,7 +93,7 @@ void Graph<T>::dijkstra(int source)
 			 * u to v, and total weight of path from source to v through u is 
 			 * smaller than current value of dist[v] 
 			 */
-			if (!sptSet.at(v) && templateCompare(graph.at(u).at(v),static_cast<T>(0)) && dist.at(u) < std::numeric_limits<T>::max() 
+			if (!sptSet.at(v) && !templateCompare(graph.at(u).at(v),static_cast<T>(0)) && dist.at(u) < std::numeric_limits<T>::max() 
 				&& dist.at(u) + graph.at(u).at(v) < dist.at(v)){
 					dist.at(v) = dist.at(u) + graph.at(u).at(v);
 				} 
