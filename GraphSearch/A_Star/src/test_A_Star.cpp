@@ -1,9 +1,28 @@
-// Driver program to test above function 
+#include "A_Star.hpp"
+
+/**
+ * @brief Driver program to test A*-graph search algorithm
+ * 
+ * @return 0 if ends 
+ */
+ 
 int main() 
 { 
-	/* Description of the Grid- 
-	1--> The cell is not blocked 
-	0--> The cell is blocked */
+	/**
+	 * @brief Graph dimension
+	 * 
+	 */
+	int n_Row = 9;
+	int n_Col = 10;
+
+	/**
+	 * @brief Description of the Grid- 
+	 * 1--> The cell is not blocked
+	 * 0--> The cell is blocked
+	 * 
+	 */
+	forwardsearch::A_Star::Graph m_Graph(n_Row,n_Col);
+
 	int grid[ROW][COL] = 
 	{ 
 		{ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 

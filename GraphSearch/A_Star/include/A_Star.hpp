@@ -287,9 +287,14 @@ public:
 	 *		W----Cell----E 
 	 *			/ | \ 
 	 *		    / | \ 
-	 *		  S.W S S.E 
-     *
-	 *	Cell--> Popped Cell (i, j) 
+	 *		  S.W S S.E
+	 * 
+	 */
+	void generateSuccessor(int m1_i, int mr_i, int m1_j, int mr_j, Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> graph, bool &foundDest);
+
+
+	/**
+	 * @brief Cell--> Popped Cell (i, j) 
 	 *  ================================
  	 *	N --> North	 (i-1, j) 
 	 *	S --> South	 (i+1, j) 
@@ -301,11 +306,14 @@ public:
 	 * 	S.W--> South-West (i+1, j-1)
 	 * =================================
 	 * 
+	 * @param i 
+	 * @param j 
+	 * @param dest 
+	 * @param cellDetails 
+	 * @param graph 
+	 * @param foundDest 
 	 */
-		
-	void generateSuccessor(int m1_i, int mr_i, int m1_j, int mr_j, Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> graph, bool foundDest);
-
-	void propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool foundDest);
+	void propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool &foundDest);
 
 };
 

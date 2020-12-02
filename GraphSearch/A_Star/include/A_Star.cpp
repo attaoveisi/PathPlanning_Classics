@@ -71,21 +71,22 @@ void Graph::aStarSearch(std::vector<std::vector<int>> graph, Pair src, Pair dest
 		int j = p.second.second; 
 		closedList.at(i).at(j) = true; 
 	
-        propagateSuccessor(i, j, dest, cellDetails, graph, foundDest);
-        
-		
+        propagateSuccessor(i, j, dest, cellDetails, graph, foundDest);		
 	} 
 
-	// When the destination cell is not found and the open 
-	// list is empty, then we conclude that we failed to 
-	// reach the destiantion cell. This may happen when the 
-	// there is no way to destination cell (due to blockages) 
-	if (foundDest == false) 
-		printf("Failed to find the Destination Cell\n"); 
-
+    /**
+     * @brief When the destination cell is not found and the open 
+     * list is empty, then we conclude that we failed to 
+     * reach the destiantion cell. This may happen when the 
+     * there is no way to destination cell (due to blockages)
+     * 
+     */
+	if (foundDest == false) {
+        std::cout << "Failed to find the Destination Cell" << std::endl; 
+    }
 } 
 
-void Graph::generateSuccessor(int &m1_i, int &mr_i, int &m1_j, int &mr_j, Pair &dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> &graph, bool &foundDest){
+void Graph::generateSuccessor(int ml_i, int mr_i, int ml_j, int mr_j, Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> graph, bool &foundDest){
     /**
      * @brief Construct a new if object
      * Only process this cell if this is a valid one 
@@ -141,7 +142,7 @@ void Graph::generateSuccessor(int &m1_i, int &mr_i, int &m1_j, int &mr_j, Pair &
     } 
 }
 
-void Graph::propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool foundDest){
+void Graph::propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool &foundDest){
     /**
      * @brief To store the 'g', 'h' and 'f' of the 8 successors 
      * 
