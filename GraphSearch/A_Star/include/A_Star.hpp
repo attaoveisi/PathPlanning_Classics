@@ -295,7 +295,7 @@ public:
 	 *		  S.W S S.E
 	 * 
 	 */
-	void generateSuccessor(int m1_i, int mr_i, int m1_j, int mr_j, Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> graph, bool &foundDest);
+	void generateSuccessor(int &m1_i, int &mr_i, int &m1_j, int &mr_j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, const std::vector<std::vector<int>> graph, bool &foundDest);
 
 
 	/**
@@ -318,7 +318,13 @@ public:
 	 * @param graph 
 	 * @param foundDest 
 	 */
-	void propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool &foundDest);
+	void propagateSuccessor(int &i, int &j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, const std::vector<std::vector<int>> graph, bool &foundDest);
+
+	/**
+	 * @brief A utility function to print the graph
+	 * 
+	 */
+	void printGraph();
 
 };
 

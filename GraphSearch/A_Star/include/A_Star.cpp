@@ -22,8 +22,7 @@ void Graph::tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest)
 
     std::stack<Pair> Path; 
 
-    while (!(cellDetails.at(row).at(col).parent_i == row 
-            && cellDetails.at(row).at(col).parent_j == col )) 
+    while (!(cellDetails.at(row).at(col).parent_i == row  && cellDetails.at(row).at(col).parent_j == col )) 
     { 
         Path.push(std::make_pair(row, col)); 
         row = cellDetails.at(row).at(col).parent_i; 
@@ -86,7 +85,7 @@ void Graph::aStarSearch(Pair src, Pair dest)
     }
 } 
 
-void Graph::generateSuccessor(int ml_i, int mr_i, int ml_j, int mr_j, Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> graph, bool &foundDest){
+void Graph::generateSuccessor(int &ml_i, int &mr_i, int &ml_j, int &mr_j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, const std::vector<std::vector<int>> graph, bool &foundDest){
     /**
      * @brief Construct a new if object
      * Only process this cell if this is a valid one 
@@ -142,7 +141,7 @@ void Graph::generateSuccessor(int ml_i, int mr_i, int ml_j, int mr_j, Pair dest,
     } 
 }
 
-void Graph::propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool &foundDest){
+void Graph::propagateSuccessor(int &i, int &j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, const std::vector<std::vector<int>> graph, bool &foundDest){
     /**
      * @brief To store the 'g', 'h' and 'f' of the 8 successors 
      * 
@@ -154,34 +153,52 @@ void Graph::propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<
      * 
      */
     //----------- 1st Successor (North) ------------ 
-    generateSuccessor(i-1, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+    i -= 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
     
     //----------- 2nd Successor (South) ------------
-    generateSuccessor(i+1, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
+    i += 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
 
     //----------- 3rd Successor (East) ------------ 
-    generateSuccessor(i, j+1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
+    j += 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
 
     //----------- 4th Successor (West) ------------ 
-    generateSuccessor(i, j-1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
+    j -= 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
 
     //----------- 5th Successor (North-East) ------------ 
-    generateSuccessor(i-1, j+1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
+    i -= 1; j += 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
     
     //----------- 6th Successor (North-West) ------------ 
-    generateSuccessor(i-1, j-1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
+    i -= 1;j -= 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
 
-    //----------- 7th Successor (South-East) ------------ 
-    generateSuccessor(i+1, j+1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
+    //----------- 7th Successor (South-East) ------------
+    i += 1;j += 1; 
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
 
     //----------- 8th Successor (South-West) ------------ 
-    generateSuccessor(i+1, j-1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+    i += 1;j -= 1;
+    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
 }
 
 void Graph::addRows(std::vector<int> graph_raws,int raw_number){
     for (int i = 0; i < graph_raws.size(); i++){
         graph.at(raw_number).at(i) = graph_raws.at(i);
     }
+}
+
+void Graph::printGraph(){
+	std::cout << "The graph structure is given as: " << std::endl;
+	for (int i = 0; i<m_Row; i++){
+		for(int j = 0; j<m_Col; j++){
+			std::cout << graph.at(i).at(j) << " ";
+		}
+		std::cout << std::endl;
+	}
 }
 
 } // Dijkstra

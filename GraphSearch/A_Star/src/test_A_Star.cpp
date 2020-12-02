@@ -38,6 +38,12 @@ int main()
 	m_Graph.addRows({ 1, 0, 0, 0, 0, 1, 0, 0, 0, 1 }, 6);
 	m_Graph.addRows({ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 7);
 	m_Graph.addRows({ 1, 1, 1, 0, 0, 0, 1, 0, 0, 1 }, 8);
+
+	/**
+	 * @brief prove that the entry is correct
+	 * 
+	 */
+	m_Graph.printGraph();
 	
 
 	m_Graph.aStarSearch(src, dest); 
