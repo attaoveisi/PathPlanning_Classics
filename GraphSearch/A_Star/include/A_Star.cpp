@@ -39,7 +39,7 @@ void Graph::tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest)
     } 
 } 
 
-void Graph::aStarSearch(std::vector<std::vector<int>> graph, Pair src, Pair dest) 
+void Graph::aStarSearch(Pair src, Pair dest) 
 { 
     /**
      * @brief Check for boundary conditions
@@ -176,6 +176,12 @@ void Graph::propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<
 
     //----------- 8th Successor (South-West) ------------ 
     generateSuccessor(i+1, j-1, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+}
+
+void Graph::addRows(std::vector<int> graph_raws,int raw_number){
+    for (int i = 0; i < graph_raws.size(); i++){
+        graph.at(raw_number).at(i) = graph_raws.at(i);
+    }
 }
 
 } // Dijkstra

@@ -15,6 +15,12 @@ int main()
 	int n_Row = 9;
 	int n_Col = 10;
 
+	// Source is the left-most bottom-most corner 
+	forwardsearch::A_Star::Graph::Pair src = std::make_pair(8, 0); 
+
+	// Destination is the left-most top-most corner 
+	forwardsearch::A_Star::Graph::Pair dest = std::make_pair(0, 0); 
+
 	/**
 	 * @brief Description of the Grid- 
 	 * 1--> The cell is not blocked
@@ -23,26 +29,18 @@ int main()
 	 */
 	forwardsearch::A_Star::Graph m_Graph(n_Row,n_Col);
 
-	int grid[ROW][COL] = 
-	{ 
-		{ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 
-		{ 1, 1, 1, 0, 1, 1, 1, 0, 1, 1 }, 
-		{ 1, 1, 1, 0, 1, 1, 0, 1, 0, 1 }, 
-		{ 0, 0, 1, 0, 1, 0, 0, 0, 0, 1 }, 
-		{ 1, 1, 1, 0, 1, 1, 1, 0, 1, 0 }, 
-		{ 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 }, 
-		{ 1, 0, 0, 0, 0, 1, 0, 0, 0, 1 }, 
-		{ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 
-		{ 1, 1, 1, 0, 0, 0, 1, 0, 0, 1 } 
-	}; 
+	m_Graph.addRows({ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 0);
+	m_Graph.addRows({ 1, 1, 1, 0, 1, 1, 1, 0, 1, 1 }, 1);
+	m_Graph.addRows({ 1, 1, 1, 0, 1, 1, 0, 1, 0, 1 }, 2);
+	m_Graph.addRows({ 0, 0, 1, 0, 1, 0, 0, 0, 0, 1 }, 3);
+	m_Graph.addRows({ 1, 1, 1, 0, 1, 1, 1, 0, 1, 0 }, 4);
+	m_Graph.addRows({ 1, 0, 1, 1, 1, 1, 0, 1, 0, 0 }, 5);
+	m_Graph.addRows({ 1, 0, 0, 0, 0, 1, 0, 0, 0, 1 }, 6);
+	m_Graph.addRows({ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 7);
+	m_Graph.addRows({ 1, 1, 1, 0, 0, 0, 1, 0, 0, 1 }, 8);
+	
 
-	// Source is the left-most bottom-most corner 
-	Pair src = make_pair(8, 0); 
-
-	// Destination is the left-most top-most corner 
-	Pair dest = make_pair(0, 0); 
-
-	aStarSearch(grid, src, dest); 
+	m_Graph.aStarSearch(src, dest); 
 
 	return(0); 
 }

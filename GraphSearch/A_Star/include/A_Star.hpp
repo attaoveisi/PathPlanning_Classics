@@ -26,18 +26,6 @@ private:
     const int m_Row;
     const int m_Col; 
 
-    /**
-     * @brief Creating a shortcut for pair
-     * 
-     */
-    using Pair = std::pair<int,int>;
-
-    /**
-     * @brief Creating a shortcut for pair of double and pair
-     * 
-     */
-    using pPair = std::pair<double, std::pair<int,int>>;
-
 	/**
 	 * @brief Graph architechture 
 	 * 
@@ -88,14 +76,6 @@ private:
 	 * 
 	 */
 	std::deque<std::deque<bool>> closedList;
-
-	/**
-	 * @brief Create an open list having information as 
-	 * <f, <i, j>> where f = g + h, and i, j are the row and column index of that cell
-	 * Note that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1 
-	 */
-	std::set<pPair> openList; 
-
 	 
     /**
      * @brief Reset the foundDest flag
@@ -104,6 +84,32 @@ private:
 	bool foundDest{false}; 
 
 public:
+
+	/**
+	 * @brief Fill out data in the graph raws
+	 * 
+	 */
+	void addRows(std::vector<int> graph_raws, int raw_number);
+
+	/**
+     * @brief Creating a shortcut for pair
+     * 
+     */
+    using Pair = std::pair<int,int>;
+
+    /**
+     * @brief Creating a shortcut for pair of double and pair
+     * 
+     */
+    using pPair = std::pair<double, std::pair<int,int>>;
+
+	/**
+	 * @brief Create an open list having information as 
+	 * <f, <i, j>> where f = g + h, and i, j are the row and column index of that cell
+	 * Note that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1 
+	 */
+	std::set<pPair> openList; 
+
 	/**
 	 * @brief Construct a new a_star object
 	 * 
@@ -127,7 +133,7 @@ public:
 		 */
 		cell m_Cell;
 		for (int i = 0; i < row; i++){
-			cellDetails.push_back(std::vector<cell>(col,m_Cell);
+			cellDetails.push_back(std::vector<cell>(col,m_Cell));
 		}
 	}
 
@@ -210,11 +216,10 @@ public:
 	 * a given source cell to a destination cell according
 	 * to A* Search Algorithm 
 	 * 
-	 * @param graph 
 	 * @param src 
 	 * @param dest 
 	 */
-	void aStarSearch(std::vector<std::vector<int>> graph, Pair src, Pair dest);
+	void aStarSearch(Pair src, Pair dest);
 
 	/**
 	 * @brief A utility function that for checking the boundary functions
