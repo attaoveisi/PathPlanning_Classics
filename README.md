@@ -5,5 +5,7 @@ The search algorithms which are implemented are:
 - Depth first (finished)
 - Dijkstra (finished)
 - A_star (Ongoing)
+
+** Documentation is created by Doxygen. Do `doxygen Doxyfile` and go to `/docs/html/index.htm` and enjoy.
 _______________________________________________________________
 Especial thank to Nicolai Spohrer
