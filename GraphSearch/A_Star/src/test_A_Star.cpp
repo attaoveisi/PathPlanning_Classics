@@ -27,7 +27,7 @@ int main()
 	 * 0--> The cell is blocked
 	 * 
 	 */
-	forwardsearch::A_Star::Graph m_Graph(n_Row,n_Col);
+	forwardsearch::A_Star::Graph m_Graph(n_Row, n_Col, src, dest);
 
 	m_Graph.addRows({ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 }, 0);
 	m_Graph.addRows({ 1, 1, 1, 0, 1, 1, 1, 0, 1, 1 }, 1);
@@ -46,7 +46,7 @@ int main()
 	m_Graph.printGraph();
 	
 
-	m_Graph.aStarSearch(src, dest); 
+	m_Graph.aStarSearch(); 
 
 	return(0); 
 }

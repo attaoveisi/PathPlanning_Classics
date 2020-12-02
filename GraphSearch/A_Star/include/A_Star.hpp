@@ -16,6 +16,8 @@
 #include <deque>
 #include <set>
 #include <cfloat>
+#include <cassert>
+#include <stdio.h> 
 
 namespace forwardsearch{
 namespace A_Star{
@@ -104,6 +106,13 @@ public:
     using pPair = std::pair<double, std::pair<int,int>>;
 
 	/**
+	 * @brief make the source and destination vertices fixed
+	 * 
+	 */
+	const Pair src;
+	const Pair dest;
+
+	/**
 	 * @brief Create an open list having information as 
 	 * <f, <i, j>> where f = g + h, and i, j are the row and column index of that cell
 	 * Note that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1 
@@ -114,8 +123,8 @@ public:
 	 * @brief Construct a new a_star object
 	 * 
 	 */
-	Graph(const int row, const int col):
-	m_Row(row), m_Col(col)
+	Graph(const int row, const int col, const Pair src, const Pair dest):
+	m_Row(row), m_Col(col), src(src), dest(dest)
 	{
 		//this->m_Row = row;
 		//this->m_Col = col;
@@ -209,7 +218,7 @@ public:
 	 * @param cellDetails 
 	 * @param dest 
 	 */
-	void tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest); 
+	std::stack<Pair> tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest); 
 
 	/**
 	 * @brief The main function to find the shortest path between
@@ -219,7 +228,7 @@ public:
 	 * @param src 
 	 * @param dest 
 	 */
-	void aStarSearch(Pair src, Pair dest);
+	void aStarSearch();
 
 	/**
 	 * @brief A utility function that for checking the boundary functions
@@ -286,7 +295,7 @@ public:
 	/**
 	 * @brief Generating all the 8 successor of this cell 
 	 * 
-	 *   	   N.W N N.E 
+	 *   	 N.W  N N.E 
 	 *			\ | / 
 	 *          \ | / 
 	 *		W----Cell----E 
@@ -325,6 +334,12 @@ public:
 	 * 
 	 */
 	void printGraph();
+
+	/**
+	 * @brief Visualize the map
+	 * 
+	 */
+	void visMap(std::stack<Graph::Pair> Path);
 
 };
 

@@ -13,13 +13,13 @@ double Graph::calculateHValue(int row, int col, Pair dest)
                         + (col-dest.second)*(col-dest.second))); 
 } 
 
-void Graph::tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest) 
+std::stack<Graph::Pair> Graph::tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest) 
 { 
     std::cout << "The path is:" << std::endl;
 
     int row = dest.first; 
     int col = dest.second; 
-
+    
     std::stack<Pair> Path; 
 
     while (!(cellDetails.at(row).at(col).parent_i == row  && cellDetails.at(row).at(col).parent_j == col )) 
@@ -29,16 +29,20 @@ void Graph::tracePath(std::vector<std::vector<cell>> cellDetails, Pair dest)
         col = cellDetails.at(row).at(col).parent_j; 
     } 
 
-    Path.push(std::make_pair(row, col)); 
-    while (!Path.empty()) 
+    Path.push(std::make_pair(row, col));
+
+    std::stack<Pair> Path_dummy = Path;
+
+    while (!Path_dummy.empty()) 
     { 
-        std::pair<int,int> p = Path.top(); 
-        Path.pop(); 
+        std::pair<int,int> p = Path_dummy.top(); 
+        Path_dummy.pop(); 
         std::cout << " -> " << p.first << " , " << p.second << std::endl;
     } 
+    return Path;
 } 
 
-void Graph::aStarSearch(Pair src, Pair dest) 
+void Graph::aStarSearch()
 { 
     /**
      * @brief Check for boundary conditions
@@ -105,6 +109,8 @@ void Graph::generateSuccessor(int &ml_i, int &mr_i, int &ml_j, int &mr_j, const 
              */
             cellDetails.at(ml_i).at(ml_j).parent_i = mr_i; 
             cellDetails.at(ml_i).at(ml_j).parent_j = mr_j; 
+            assert((ml_i <= 0 && ml_i >= m_Row) && "Illegal row size");
+            assert((ml_j <= 0 && ml_j >= m_Col) && "Illegal column size");
             std::cout << "The destination cell is found" << std::endl;
             tracePath (cellDetails, dest); 
             foundDest = true; 
@@ -201,5 +207,31 @@ void Graph::printGraph(){
 	}
 }
 
-} // Dijkstra
+void Graph::visMap(std::stack<Graph::Pair> Path){
+    int pathLength = Path.size();
+    for (int i = 0; i < m_Row; i++) {
+        std::pair<int,int> pTop = Path.top();
+        for (int j = 0; j < m_Col; j++) {
+            if (graph.at(i).at(j)) {
+                putchar(0xdb);
+            } else {
+                int b = 0;
+                for (int k = 0; k < pathLength; k++) {
+                    if (cellDetails.at(i).at(j).parent_i == pTop.first && cellDetails.at(i).at(j).parent_j == pTop.second){
+                        ++b;
+                    }
+                }
+                if(b) {
+                    putchar('x');
+                } else {
+                    putchar('.');
+                }
+                Path.pop(); 
+            }
+        }
+        putchar('\n');
+    }
+}
+
+} // A_Star
 } // forwardsearch
