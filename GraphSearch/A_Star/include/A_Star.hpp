@@ -14,6 +14,8 @@
 #include <cmath>
 #include <stack>
 #include <deque>
+#include <set>
+#include <cfloat>
 
 namespace forwardsearch{
 namespace A_Star{
@@ -21,8 +23,8 @@ namespace A_Star{
 class Graph{
 private:
 
-    const int ROW;
-    const int COL; 
+    const int m_Row;
+    const int m_Col; 
 
     /**
      * @brief Creating a shortcut for pair
@@ -30,7 +32,6 @@ private:
      */
     using Pair = std::pair<int,int>;
 
-// Creating a shortcut for pair<int, pair<int, int>> type
     /**
      * @brief Creating a shortcut for pair of double and pair
      * 
@@ -63,7 +64,7 @@ private:
 
 		/**
 		 * @brief Row and Column index of its parent
-		 * that 0 <= i <= ROW-1 & 0 <= j <= COL-1 
+		 * that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1 
 		 * 
 		 */
 		int parent_i, parent_j; 
@@ -88,51 +89,65 @@ private:
 	 */
 	std::deque<std::deque<bool>> closedList;
 
+	/**
+	 * @brief Create an open list having information as 
+	 * <f, <i, j>> where f = g + h, and i, j are the row and column index of that cell
+	 * Note that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1 
+	 */
+	std::set<pPair> openList; 
+
+	 
+    /**
+     * @brief Reset the foundDest flag
+     * 
+     */
+	bool foundDest{false}; 
+
 public:
 	/**
 	 * @brief Construct a new a_star object
 	 * 
 	 */
-	Graph(const int m_Row, const int m_Col):
-	ROW(m_Row), COL(m_Col)
+	Graph(const int row, const int col):
+	m_Row(row), m_Col(col)
 	{
-		//this->ROW = m_Row;
-		//this->COL = m_Col;
-		for (int i = 0; i < m_Row; i++){
-		graph.push_back(std::vector<int>(m_Col,0));
+		//this->m_Row = row;
+		//this->m_Col = col;
+		for (int i = 0; i < row; i++){
+		graph.push_back(std::vector<int>(col,0));
 		}
 
-		for (int i = 0; i < m_Row; i++){
-		closedList.push_back(std::deque<bool>(m_Col,false));
+		for (int i = 0; i < row; i++){
+		closedList.push_back(std::deque<bool>(col,false));
 		}
 
 		/**
-		 * @brief Initialising the parameters of the starting node 
+		 * @brief Declare a 2D array of structure to hold the details of that cell 
 		 * 
 		 */
 		cell m_Cell;
-		for (int i = 0; i < m_Row; i++){
-			cellDetails.push_back(std::vector<cell>(m_Col,m_Cell));
+		for (int i = 0; i < row; i++){
+			cellDetails.push_back(std::vector<cell>(col,m_Cell);
 		}
 	}
 
 	/**
-	 * @brief A Utility Function to check whether given cell (m_Row, m_Col) 
+	 * @brief A Utility Function to check whether given cell (row, col) 
 	 * is a valid cell or not.
 	 * 
-	 * @param m_Row 
-	 * @param m_Col 
-	 * @return true if m_Row number and m_Column number is in range 
+	 * @param row 
+	 * @param col 
+	 * @return true if row number and column number is in range 
 	 * @return false 
 	 */
-	bool isValid(int m_Row, int m_Col)
+	bool isValid(int row, int col)
 	{ 
 		/**
 		 * @brief Returns true if row number and column number is in range 
 		 * 
 		 */
-		return (m_Row >= 0) && (m_Row < ROW) && 
-			(m_Col >= 0) && (m_Col < COL); 
+		return (row >= 0) && (row < m_Row) && 
+			(col >= 0) && (col < m_Col); 
 	} 
 
 	/**
@@ -140,14 +155,14 @@ public:
 	 * blocked or not
 	 * 
 	 * @param graph 
-	 * @param m_Row 
-	 * @param m_Col 
+	 * @param row 
+	 * @param col 
 	 * @return true if the cell is not blocked else false
 	 * @return false 
 	 */
-	bool isUnBlocked(std::vector<std::vector<int>> graph, int m_Row, int m_Col) 
+	bool isUnBlocked(std::vector<std::vector<int>> graph, int row, int col) 
 	{ 
-		if (graph.at(m_Row).at(m_Col) == 1) {
+		if (graph.at(row).at(col) == 1) {
 			return true; 
 		}else{
 			return false; 
@@ -157,15 +172,15 @@ public:
 	/**
 	 * @brief A Utility Function to check whether destination cell has been reached or not
 	 * 
-	 * @param m_Row 
-	 * @param m_Col 
+	 * @param row 
+	 * @param col 
 	 * @param dest 
 	 * @return true 
 	 * @return false 
 	 */
-	bool isDestination(int m_Row, int m_Col, Pair dest) 
+	bool isDestination(int row, int col, Pair dest) 
 	{ 
-		if (m_Row == dest.first && m_Col == dest.second){
+		if (row == dest.first && col == dest.second){
 			return true; 
 		}else{
 			return false;
@@ -175,12 +190,12 @@ public:
 	/**
 	 * @brief A Utility Function to calculate the 'h' heuristics. 
 	 * 
-	 * @param m_Row 
-	 * @param m_Col 
+	 * @param row 
+	 * @param col 
 	 * @param dest 
 	 * @return double 
 	 */
-	double calculateHValue(int m_Row, int m_Col, Pair dest); 
+	double calculateHValue(int row, int col, Pair dest); 
 
 	/**
 	 * @brief A Utility Function to trace the path from the source to destination 
@@ -247,6 +262,51 @@ public:
 			return; 
 		} 
 	}
+
+	/**
+     * @brief Initialize for the given source (src)
+     * 
+     */
+	void initSrc(Pair src){
+		int i = src.first;
+		int j = src.second; 
+		cellDetails.at(i).at(j).f = 0.0; 
+		cellDetails.at(i).at(j).g = 0.0; 
+		cellDetails.at(i).at(j).h = 0.0; 
+		cellDetails.at(i).at(j).parent_i = i; 
+		cellDetails.at(i).at(j).parent_j = j;
+		openList.insert(std::make_pair(0.0, std::make_pair(i, j)));
+	} 
+
+	/**
+	 * @brief Generating all the 8 successor of this cell 
+	 * 
+	 *   	   N.W N N.E 
+	 *			\ | / 
+	 *          \ | / 
+	 *		W----Cell----E 
+	 *			/ | \ 
+	 *		    / | \ 
+	 *		  S.W S S.E 
+     *
+	 *	Cell--> Popped Cell (i, j) 
+	 *  ================================
+ 	 *	N --> North	 (i-1, j) 
+	 *	S --> South	 (i+1, j) 
+	 *	E --> East	 (i, j+1) 
+	 *	W --> West		 (i, j-1) 
+	 *	N.E--> North-East (i-1, j+1) 
+	 *	N.W--> North-West (i-1, j-1) 
+	 *	S.E--> South-East (i+1, j+1) 
+	 * 	S.W--> South-West (i+1, j-1)
+	 * =================================
+	 * 
+	 */
+		
+	void generateSuccessor(int m1_i, int mr_i, int m1_j, int mr_j, Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, std::vector<std::vector<int>> graph, bool foundDest);
+
+	void propagateSuccessor(int i, int j, Pair dest, std::vector<std::vector<cell>> &cellDetails, std::vector<std::vector<int>> graph, bool foundDest);
+
 };
 
 } // A_STAR
