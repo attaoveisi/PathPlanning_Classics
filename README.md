@@ -1,5 +1,6 @@
 # PathPlanning_Classics (This repo is under construction)
-The path planning and graph search algorithms
+**Goal:** The path planning and graph search algorithms
+
 **The search algorithms:**
 - Breadth first (finished)
 - Depth first (finished)
