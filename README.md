@@ -14,10 +14,14 @@ _______________________________________________________________
 _______________________________________________________________
 To use:
 `git clone git clone https://github.com/attaoveisi/PathPlanning_Classics.git`
+'\n'
 then:
+'\n'
 `cd PathPlanning_Classics`
-and 
-`wstool init src/ src/nuturtle.rosinstall`
+'\n'
+and
+'\n' 
+`wstool init src/ src/include.rosinstall`
 
 
 ** Documentation is created by Doxygen. Do `doxygen Doxyfile` and go to `/docs/html/index.htm` and enjoy.
