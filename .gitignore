@@ -9,6 +9,9 @@ build
 bUILD
 html
 latex
+src/.rosinstall
+src/turtlebot3/
+
 
 # Other files and folders
 .settings/
