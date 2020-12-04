@@ -1,0 +1,3 @@
+- git:
+    local-name: turtlebot3
+    uri: https://github.com/moribots/turtlebot3_from_scratch.git
