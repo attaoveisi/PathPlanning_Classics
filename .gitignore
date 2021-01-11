@@ -12,6 +12,7 @@ latex
 src/.rosinstall
 src/turtlebot3/
 .idea
+src/cmake-build-debug/
 
 
 # Other files and folders
