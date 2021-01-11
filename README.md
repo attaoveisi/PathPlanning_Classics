@@ -25,20 +25,18 @@ For convex polygons, computing the convolution is trivial and can be done in lin
 _______________________________________________________________
 **Discrete optimal planning:**
 - backward value iteration (Ongoing)
+_______________________________________________________________
+**Obstacles and map:**
+- Minkowski sum
 
 _______________________________________________________________
 To use:
 `git clone git clone https://github.com/attaoveisi/PathPlanning_Classics.git`
-'\n'
+
 then:
-'\n'
+
 `cd PathPlanning_Classics`
-'\n'
-and
-'\n' 
-`wstool init src/ src/include.rosinstall`
 
 
 ** Documentation is created by Doxygen. Do `doxygen Doxyfile` and go to `/docs/html/index.htm` and enjoy.
 _______________________________________________________________
-Especial thank to Nicolai Spohrer
