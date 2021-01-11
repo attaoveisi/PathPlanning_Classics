@@ -11,6 +11,7 @@ html
 latex
 src/.rosinstall
 src/turtlebot3/
+.idea
 
 
 # Other files and folders
