@@ -25,6 +25,9 @@ For convex polygons, computing the convolution is trivial and can be done in lin
 _______________________________________________________________
 **Discrete optimal planning:**
 - backward value iteration (Ongoing)
+_______________________________________________________________
+**Obstacles and map:**
+- Minkowski sum
 
 _______________________________________________________________
 To use:
