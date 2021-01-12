@@ -40,6 +40,7 @@ Planning on a graph rather than a cell decomposition is a fantastic way to impro
 ![image](https://user-images.githubusercontent.com/17289954/104284902-18fc5000-54b3-11eb-9848-568b8a55ca93.png)
 
 see [this](https://github.com/TaipanRex/pyvisgraph/tree/master/pyvisgraph) implementation in python.
+Alse [this](https://github.com/rowanwins/visibility-graph) and [this](https://github.com/kevinzg/spholes)
 
 #### Voronoi Diagram
 
@@ -116,25 +117,19 @@ an online tool to see the differences avaialable [here](https://qiao.github.io/P
 ## Implemented approaches
 
 **The search algorithms:**
-- Breadth first (finished)
-- Depth first (finished)
-- Dijkstra (finished)
-- A_star (Ongoing)
+- Breadth first 
+- Depth first 
+- Dijkstra 
+- A_star 
 - ...
-_______________________________________________________________
-**Discrete optimal planning:**
-- backward value iteration (Ongoing)
+
 _______________________________________________________________
 **Obstacles and map:**
-- Minkowski sum
+- Minkowski sum 
 
 _______________________________________________________________
 To use:
 `git clone git clone https://github.com/attaoveisi/PathPlanning_Classics.git`
-
-then:
-
-`cd PathPlanning_Classics`
 
 
 ** Documentation is created by Doxygen. Do `doxygen Doxyfile` and go to `/docs/html/index.htm` and enjoy.
