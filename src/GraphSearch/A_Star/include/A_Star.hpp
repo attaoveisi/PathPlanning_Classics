@@ -85,6 +85,8 @@ private:
 
 public:
 
+    std::stack<std::pair<int,int>> finalPath;
+
 	/**
 	 * @brief Fill out data in the graph raws
 	 * 

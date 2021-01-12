@@ -195,7 +195,7 @@ void Graph::generateSuccessor(int &ml_i, int &ml_j, int &mr_i, int &mr_j, const 
             //assert((ml_i <= 0 && ml_i >= m_Row) && "Illegal row size");
             //assert((ml_j <= 0 && ml_j >= m_Col) && "Illegal column size");
             std::cout << "The destination cell is found" << std::endl;
-            tracePath (cellDetails, dest); 
+            finalPath = tracePath(cellDetails, dest);
             foundDest = true; 
             return; 
         }else if (closedList.at(ml_i).at(ml_j) == false && isUnBlocked(graph, ml_i, ml_j) == true) 
