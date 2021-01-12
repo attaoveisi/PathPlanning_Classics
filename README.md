@@ -15,7 +15,7 @@ For convex polygons, computing the convolution is trivial and can be done in lin
 
 ### Discretization
 
-1) Roadmap
+1) **Roadmap**
 
 These methods represent the configuration space using a simple connected graph - similar to how a city can be represented by a metro map. 
 
@@ -27,7 +27,7 @@ Roadmap methods are typically implemented in two phases:
 
 - The **query phase** evaluates the graph to find a path from a start location to a goal location. This is done with the help of a search algorithm.
 
-#### Visibility Graph
+##### Visibility Graph
 
 The Visibility Graph builds a roadmap by connecting the start node, all of the obstacles’ vertices, and goal node to each other - except those that would result in collisions with obstacles. The Visibility Graph has its name for a reason - it connects every node to all other nodes that are ‘visible’ from its location. 
 
@@ -41,12 +41,49 @@ Planning on a graph rather than a cell decomposition is a fantastic way to impro
 
 see [this](https://github.com/TaipanRex/pyvisgraph/tree/master/pyvisgraph) implementation in python.
 
-#### Voronoi Diagram
+##### Voronoi Diagram
 
+Another discretization method that generates a roadmap is called the Voronoi Diagram. Unlike the visibility graph method which generates the shortest paths, Voronoi Diagrams maximize clearance between obstacles.
 
-2) Cell decomposition
+A Voronoi Diagram is a graph whose edges bisect the free space in between obstacles. Every edge lies equidistant from each obstacle around it - with the greatest amount of clearance possible. You can see a Voronoi Diagram for our configuration space in the graphic below. 
 
-3) Gradient field
+![image](https://user-images.githubusercontent.com/17289954/104288253-d7ba6f00-54b7-11eb-9fe3-b4790e9b0dac.png)#
+
+2) **Cell decomposition**
+
+Cell decomposition divides the space into discrete cells, where each cell is a node and adjacent cells are connected with edges. There are two distinct types of cell decomposition:
+
+- Exact Cell Decomposition
+- Approximate Cell Decomposition
+
+Exact cell decomposition divides the space into non-overlapping cells. This is commonly done by breaking up the space into triangles and trapezoids, which can be accomplished by adding vertical line segments at every obstacle’s vertex.
+
+![image](https://user-images.githubusercontent.com/17289954/104288552-3f70ba00-54b8-11eb-9279-2ca8063cdd46.png)
+
+To implement exact cell decomposition, the algorithm must order all obstacle vertices along the x-axis, and then for every vertex determine whether a new cell must be created or whether two cells should be merged together. Such an algorithm is called the *Plane Sweep algorithm*. 
+
+Approximate cell decomposition divides a configuration space into discrete cells of simple, regular shapes - such as rectangles and squares (or their multidimensional equivalents). Aside from simplifying the computation of the cells, this method also supports hierarchical decomposition of space (more on this below). 
+
+**Simple Decomposition**
+
+A 2-dimensional configuration space can be decomposed into a grid of rectangular cells. Then, each cell could be marked full or empty, as before. A search algorithm can then look for a sequence of free cells to connect the start node to the goal node.
+
+Such a method is more efficient than exact cell decomposition, but it loses its completeness. It is possible that a particular configuration space contains a feasible path, but the resolution of the cells results in some of the cells encompassing the path to be marked ‘full’ due to the presence of obstacles. A cell will be marked ‘full’ whether 99% of the space is occupied by an obstacle or a mere 1%. Evidently, this is not practical. 
+
+**Iterative Decomposition**
+
+An alternate method of partitioning a space into simple cells exists. Instead of immediately decomposing the space into small cells of equal size, the method recursively decomposes a space into four quadrants. Each quadrant is marked full, empty, or a new label called ‘mixed’ - used to represent cells that are somewhat occupied by an obstacle, but also contain some free space. If a sequence of free cells cannot be found from start to goal, then the mixed cells will be further decomposed into another four quadrants. Through this process, more free cells will emerge, eventually revealing a path if one exists.
+
+The 2-dimensional implementation of this method is called quadtree decomposition. It can be seen in the graphic below
+
+![image](https://user-images.githubusercontent.com/17289954/104289238-316f6900-54b9-11eb-9819-23241bb504ca.png)
+
+![image](https://user-images.githubusercontent.com/17289954/104289424-68de1580-54b9-11eb-97ce-f842027cf7b9.png)
+
+3) **Potential field**
+
+the potential field method generates two functions - one that attracts the robot to the goal and one that repels the robot away from obstacles. The two functions can be summed to create a discretized representation. By applying an optimization algorithm such as gradient descent, a robot can move toward the goal configuration while steering around obstacles. Let’s look at how each of these steps is implemented in more detail. 
+
 
 
 ### Graph search
