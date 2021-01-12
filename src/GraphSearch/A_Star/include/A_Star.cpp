@@ -24,9 +24,11 @@ std::stack<Graph::Pair> Graph::tracePath(std::vector<std::vector<cell>> cellDeta
 
     while (!(cellDetails.at(row).at(col).parent_i == row  && cellDetails.at(row).at(col).parent_j == col )) 
     { 
-        Path.push(std::make_pair(row, col)); 
-        row = cellDetails.at(row).at(col).parent_i; 
-        col = cellDetails.at(row).at(col).parent_j; 
+        Path.push(std::make_pair(row, col));
+        int temp_row = cellDetails.at(row).at(col).parent_i;
+        int temp_col = cellDetails.at(row).at(col).parent_j;
+        row = temp_row;
+        col = temp_col;
     } 
 
     Path.push(std::make_pair(row, col));
@@ -87,9 +89,90 @@ void Graph::aStarSearch()
 	if (foundDest == false) {
         std::cout << "Failed to find the Destination Cell" << std::endl; 
     }
-} 
+}
 
-void Graph::generateSuccessor(int &ml_i, int &mr_i, int &ml_j, int &mr_j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, const std::vector<std::vector<int>> graph, bool &foundDest){
+    void Graph::propagateSuccessor(int &i, int &j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, const std::vector<std::vector<int>> graph, bool &foundDest){
+        /**
+         * @brief To store the 'g', 'h' and 'f' of the 8 successors
+         *
+         */
+        double gNew, hNew, fNew;
+
+        int ml_i = i;
+        int ml_j = j;
+        int mr_i = i;
+        int mr_j = j;
+
+        /**
+         * @brief Cycle around all successors
+         *
+         */
+        /**
+         * @brief 1st Successor (North)
+         */
+        ml_i -= 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_i += 1;
+
+        /**
+         * @brief 2nd Successor (South)
+         */
+        ml_i += 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_i -= 1;
+
+        /**
+         * @brief 3rd Successor (East)
+         */
+        ml_j += 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_j -= 1;
+
+        /**
+         * @brief 4th Successor (West)
+         */
+        ml_j -= 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_j += 1;
+
+        /**
+         * @brief 5th Successor (North-East)
+         */
+        ml_i -= 1;
+        ml_j += 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_i += 1;
+        ml_j -= 1;
+
+        /**
+         * @brief 6th Successor (North-West)
+         */
+        ml_i -= 1;
+        ml_j -= 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_i += 1;
+        ml_j += 1;
+
+        /**
+         * @brief 7th Successor (South-East)
+         */
+        ml_i += 1;
+        ml_j += 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_i -= 1;
+        ml_j -= 1;
+
+        /**
+         * @brief 8th Successor (South-West)
+         */
+        ml_i += 1;
+        ml_j -= 1;
+        generateSuccessor(ml_i, ml_j, mr_i, mr_j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
+        ml_i -= 1;
+        ml_j += 1;
+    }
+
+void Graph::generateSuccessor(int &ml_i, int &ml_j, int &mr_i, int &mr_j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, double &gNew, double &hNew, double &fNew, const std::vector<std::vector<int>> graph, bool &foundDest){
     /**
      * @brief Construct a new if object
      * Only process this cell if this is a valid one 
@@ -109,8 +192,8 @@ void Graph::generateSuccessor(int &ml_i, int &mr_i, int &ml_j, int &mr_j, const 
              */
             cellDetails.at(ml_i).at(ml_j).parent_i = mr_i; 
             cellDetails.at(ml_i).at(ml_j).parent_j = mr_j; 
-            assert((ml_i <= 0 && ml_i >= m_Row) && "Illegal row size");
-            assert((ml_j <= 0 && ml_j >= m_Col) && "Illegal column size");
+            //assert((ml_i <= 0 && ml_i >= m_Row) && "Illegal row size");
+            //assert((ml_j <= 0 && ml_j >= m_Col) && "Illegal column size");
             std::cout << "The destination cell is found" << std::endl;
             tracePath (cellDetails, dest); 
             foundDest = true; 
@@ -145,50 +228,6 @@ void Graph::generateSuccessor(int &ml_i, int &mr_i, int &ml_j, int &mr_j, const 
             } 
         } 
     } 
-}
-
-void Graph::propagateSuccessor(int &i, int &j, const Pair dest, std::vector<std::vector<cell>> &cellDetails, const std::vector<std::vector<int>> graph, bool &foundDest){
-    /**
-     * @brief To store the 'g', 'h' and 'f' of the 8 successors 
-     * 
-     */
-    double gNew, hNew, fNew; 
-
-    /**
-     * @brief Cycle around all successors 
-     * 
-     */
-    //----------- 1st Successor (North) ------------ 
-    i -= 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
-    
-    //----------- 2nd Successor (South) ------------
-    i += 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
-
-    //----------- 3rd Successor (East) ------------ 
-    j += 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
-
-    //----------- 4th Successor (West) ------------ 
-    j -= 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
-
-    //----------- 5th Successor (North-East) ------------ 
-    i -= 1; j += 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
-    
-    //----------- 6th Successor (North-West) ------------ 
-    i -= 1;j -= 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
-
-    //----------- 7th Successor (South-East) ------------
-    i += 1;j += 1; 
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest); 
-
-    //----------- 8th Successor (South-West) ------------ 
-    i += 1;j -= 1;
-    generateSuccessor(i, j, i, j, dest, cellDetails, gNew, hNew, fNew, graph, foundDest);
 }
 
 void Graph::addRows(std::vector<int> graph_raws,int raw_number){

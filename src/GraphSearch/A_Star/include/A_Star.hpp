@@ -38,33 +38,31 @@ private:
 	 * @brief A structure to hold the neccesary parameters
 	 * 
 	 */
-	struct cell 
-	{ 
-		/**
-		 * @brief Construct a new cell stuct object
-		 * 
-		 * @param parent_i 
-		 * @param parent_j 
-		 * @param f 
-		 * @param g 
-		 * @param h 
-		 */
-		cell(int parent_i = -1, int parent_j = -1, double f = FLT_MAX, double g = FLT_MAX, double h = FLT_MAX):
-		parent_i(parent_i), parent_j(parent_j), f(f), g(g), h(h) {}
+	struct cell
+	{
+        /**
+         * @brief Row and Column index of its parent
+         * that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1
+         *
+         */
+        int parent_i{-1}, parent_j{-1};
 
-		/**
-		 * @brief Row and Column index of its parent
-		 * that 0 <= i <= m_Row-1 & 0 <= j <= m_Col-1 
-		 * 
-		 */
-		int parent_i, parent_j; 
+        /**
+         * @brief f = g + h
+         *
+         */
+        double f{FLT_MAX}, g{FLT_MAX}, h{FLT_MAX};
 
-		/**
-		 * @brief f = g + h
-		 * 
-		 */
-		double f, g, h; 
-	}; 
+        /**
+         * @brief Construct a new cell stuct object
+         *
+         * @param parent_i
+         * @param parent_j
+         * @param f
+         * @param g
+         * @param h
+         */
+	};
 
 	/**
 	 * @brief Declare a 2D array of structure to hold the details of that cell 
