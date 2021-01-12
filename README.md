@@ -110,6 +110,8 @@ The **generality** of an algorithm considers the type of problems that the algor
 - Dijkstra
 - A_star
 
+![image](https://user-images.githubusercontent.com/17289954/104340676-3c49ee00-54f9-11eb-8934-0228a8d62b60.png)
+
 for nice extensions on A* take a look at [this](http://theory.stanford.edu/~amitp/GameProgramming/Variations.html) and [this](https://movingai.com/astar-var.html)
 
 an online tool to see the differences avaialable [here](https://qiao.github.io/PathFinding.js/visual/)
