@@ -98,6 +98,20 @@ Where the function ρ(x) returns the distance from the robot to its nearest obst
 
 ## Graph search
 
+The **time complexity** of an algorithm assesses how long it takes an algorithm to generate a path, usually with respect to the number of nodes or dimensions present. It can also refer to the trade-off between quality of an algorithm (ex. completeness) vs its computation time.
+
+The **space complexity** of an algorithm assesses how much memory is required to execute the search. Some algorithms must keep significant amounts of information in memory throughout their run-time, while others can get away with very little.
+
+The **generality** of an algorithm considers the type of problems that the algorithm can solve.
+
+- Breadth first
+- Depth first
+- Dijkstra
+- A_star
+
+for nice extensions on A* take a look at [this](http://theory.stanford.edu/~amitp/GameProgramming/Variations.html) and [this](https://movingai.com/astar-var.html)
+
+an online tool to see the differences avaialable [here](https://qiao.github.io/PathFinding.js/visual/)
 
 ## Implemented approaches
 
