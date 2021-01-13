@@ -116,6 +116,36 @@ for nice extensions on A* take a look at [this](http://theory.stanford.edu/~amit
 
 an online tool to see the differences avaialable [here](https://qiao.github.io/PathFinding.js/visual/)
 
+## Sample-Based Path Planning
+
+In more than 2D problem, due to *Increased Dimensionality*, *Constrained Dynamics* the methods in 2D approach are not applicable.
+
+For a 2-dimensional 8-connected space, every node has 8 successors (8-connected means that from every cell you can move laterally or diagonally). Imagine a 3-dimensional 8-connected space, how many successors would every node have? 26. As the dimension of the C-space grows, the number of successors that every cell has increases substantially. In fact, for an n-dimensional space, it is equal to 3^n - 1.
+
+Aside from robots with many degrees of freedom and multi-robot systems, another computational difficulty involves working with robots that have constrained dynamics. For instance, a car is limited in its motion - it can move forward and backward, and it can turn with a limited turning radius - as you can see in the image below. Robotic systems can be classified into two different categories - *holonomic* and *non-holonomic*. Holonomic systems can be defined as systems where every constraint depends exclusively on the current pose and time, and not on any derivatives with respect to time. Nonholonomic systems, on the other hand, are dependent on derivatives. Path planning for nonholonomic systems is more difficult due to the added constraints.
+
+Sample-based path planning differs from combinatorial path planning in that it does not try to systematically discretize the entire configuration space. Instead, it samples the configuration space randomly (or semi-randomly) to build up a representation of the space. The resultant graph is not as precise as one created using combinatorial planning, but it is much quicker to construct because of the relatively small number of samples used.
+
+Such an approach is very effective in high-dimensional spaces, however it does have some downfalls. Sampling a space uniformly is not likely to reach small or narrow areas, such as the passage depicted in the image below. Since the passage is the only way to move from start to goal, it is critical that a sufficient number of samples occupy the passage, or the algorithm will return ‘no solution found’ to a problem that clearly has a solution. 
+
+I have listed two approaches:
+
+1) Probabilistic Roadmap Method
+
+2) Rapidly Exploring Random Tree Method
+
+### Probabilistic Roadmap Method
+
+The process consists of exploration and query
+
+![image](https://user-images.githubusercontent.com/17289954/104424059-2717a280-557f-11eb-95e0-ff071e6a24d0.png)
+
+![image](https://user-images.githubusercontent.com/17289954/104424205-58906e00-557f-11eb-8e61-a41de783b2b2.png)
+
+There are several parameters in the PRM algorithm that require tweaking to achieve success in a particular application. Firstly, the number of iterations can be adjusted - the parameter controls between how detailed the resultant graph is and how long the computation takes. Another decision that a robotics engineer would need to make is how to find neighbors for a randomly generated configuration. One option is to look for the k-nearest neighbors to a node. To do so efficiently, a k-d tree can be utilized - to break up the space into ‘bins’ with nodes, and then search the bins for the nearest nodes. Another option is to search for any nodes within a certain distance of the goal. Ultimately, knowledge of the environment and the solution requirements will drive this decision-making process. The choice for what type of **loanner**o use is another decision that needs to be made by the robotics engineer. For most scenarios, a simple planner is preferred, as the process of checking an edge for collisions is repeated many times (k*n times, to be exact) and efficiency is key. However, more powerful planners may be required in certain problems. In such a case, the local planner could even be another PRM. 
+
+### Rapidly Exploring Random Tree Method
+
 ## Implemented approaches
 
 **The search algorithms:**
