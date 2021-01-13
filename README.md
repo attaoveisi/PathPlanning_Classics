@@ -134,15 +134,19 @@ I have listed two approaches:
 
 2) Rapidly Exploring Random Tree Method
 
-### Probabilistic Roadmap Method
+The methods are explained below. These methods are quiet jerky and can not be readily applied on the robot, a postprocesing **smoothing** step should be carried out in order to make the path drivable.
+
+### Probabilistic Roadmap Method (PRM)
 
 The process consists of exploration and query. In the exploration phase, as it can be seen below, the configuration space is randomly sampled
 
 ![image](https://user-images.githubusercontent.com/17289954/104425957-94c4ce00-5581-11eb-945e-0e74ae6bb210.png)
 
-
+Then, a new sample is generated (in refinement phase) and the possibility to connect with neighboring nodes is checked.
 
 ![image](https://user-images.githubusercontent.com/17289954/104424059-2717a280-557f-11eb-95e0-ff071e6a24d0.png)
+
+Finally, if the configuration space is sparsely sampled, a search algorithm such as A* is used to find the correct path. Tha pseudo-algorithm is shown below:
 
 ![image](https://user-images.githubusercontent.com/17289954/104424205-58906e00-557f-11eb-8e61-a41de783b2b2.png)
 
@@ -150,7 +154,24 @@ There are several parameters in the PRM algorithm that require tweaking to achie
 
 The Learning Phase takes significantly longer to implement than the Query Phase, which only has to connect the start and goal nodes, and then search for a path. However, the graph created by the Learning Phase can be reused for many subsequent queries. For this reason, PRM is called a multi-query planner. This is very beneficial in static or mildly-changing environments. However, some environments change so quickly that PRM’s multi-query property cannot be exploited. In such situations, PRM’s additional detail and computational slow nature is not appreciated. A quicker algorithm would be preferred - one that doesn’t spend time going in all directions without influence by the start and goal.
 
-### Rapidly Exploring Random Tree Method
+### Rapidly Exploring Random Tree Method (RRT)
+
+unlike PRM, RRT disregards a dense distribution of the node in C-space and builds individual queries-based search- It is trivial that PRM is better for static environment where the sampled environment can be used for multiple queries while RRT is thought for dynamical planning.
+
+RRT generates one connection to each parent. If the node is within the certain distance, then it will be connected, otherwise in the same direction a node within a certain distance will be created.  
+
+![image](https://user-images.githubusercontent.com/17289954/104426823-c38f7400-5582-11eb-82e5-26a144d48dd2.png)
+
+The pseudo-algorithm looks like this:
+
+![image](https://user-images.githubusercontent.com/17289954/104427216-46183380-5583-11eb-915a-b3c972fc8aee.png)
+
+One key parameter in this method is the sampling method (ie. how a random configuration is generated) e.g., sample uniformly - which would favour wide unexplored spaces, or sample with a bias - which would cause the search to advance greedily in the direction of the goal. Greediness can be beneficial in simple planning problems, however in some environments it can cause the robot to get stuck in a local minima. It is common to utilize a uniform sampling method with a small hint of bias.
+
+The next parameter that can be tuned is δ. As RRT starts to generate random configurations, a large proportion of these configurations will lie further than a distance δ from the closest configuration in the graph. In such a situation, a randomly generated node will dictate the direction of growth, while δ is the growth rate. Choosing a small δ will result in a large density of nodes and small growth rate. On the other hand, choosing a large δ may result in lost detail, as well as an increasing number of nodes being unable to connect to the graph due to the greater chance of collisions with obstacles. δ must be chosen carefully, with knowledge of the environment and requirements of the solution.
+
+the RRT method supports planning for non-holonomic systems, while the PRM method does not. This is so because the RRT method can take into consideration the additional constraints (such as a car’s turning radius at a particular speed) when adding nodes to a graph, the same way it already takes into consideration how far away a new node is from an existing tree.
+
 
 ## Implemented approaches
 
