@@ -172,6 +172,7 @@ The next parameter that can be tuned is δ. As RRT starts to generate random con
 
 the RRT method supports planning for non-holonomic systems, while the PRM method does not. This is so because the RRT method can take into consideration the additional constraints (such as a car’s turning radius at a particular speed) when adding nodes to a graph, the same way it already takes into consideration how far away a new node is from an existing tree.
 
+see [this](https://webspace.science.uu.nl/~gerae101/pdf/compare.pdf) and [this](https://www.cs.cmu.edu/~maxim/files/pathplanforMAV_icra13.pdf) for more information.
 
 ## Implemented approaches
 
