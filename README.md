@@ -136,13 +136,19 @@ I have listed two approaches:
 
 ### Probabilistic Roadmap Method
 
-The process consists of exploration and query
+The process consists of exploration and query. In the exploration phase, as it can be seen below, the configuration space is randomly sampled
+
+![image](https://user-images.githubusercontent.com/17289954/104425957-94c4ce00-5581-11eb-945e-0e74ae6bb210.png)
+
+
 
 ![image](https://user-images.githubusercontent.com/17289954/104424059-2717a280-557f-11eb-95e0-ff071e6a24d0.png)
 
 ![image](https://user-images.githubusercontent.com/17289954/104424205-58906e00-557f-11eb-8e61-a41de783b2b2.png)
 
-There are several parameters in the PRM algorithm that require tweaking to achieve success in a particular application. Firstly, the number of iterations can be adjusted - the parameter controls between how detailed the resultant graph is and how long the computation takes. Another decision that a robotics engineer would need to make is how to find neighbors for a randomly generated configuration. One option is to look for the k-nearest neighbors to a node. To do so efficiently, a k-d tree can be utilized - to break up the space into ‘bins’ with nodes, and then search the bins for the nearest nodes. Another option is to search for any nodes within a certain distance of the goal. Ultimately, knowledge of the environment and the solution requirements will drive this decision-making process. The choice for what type of **loanner**o use is another decision that needs to be made by the robotics engineer. For most scenarios, a simple planner is preferred, as the process of checking an edge for collisions is repeated many times (k*n times, to be exact) and efficiency is key. However, more powerful planners may be required in certain problems. In such a case, the local planner could even be another PRM. 
+There are several parameters in the PRM algorithm that require tweaking to achieve success in a particular application. Firstly, the number of iterations can be adjusted - the parameter controls between how detailed the resultant graph is and how long the computation takes. Another decision that a robotics engineer would need to make is how to find neighbors for a randomly generated configuration. One option is to look for the k-nearest neighbors to a node. To do so efficiently, a k-d tree can be utilized - to break up the space into ‘bins’ with nodes, and then search the bins for the nearest nodes. Another option is to search for any nodes within a certain distance of the goal. Ultimately, knowledge of the environment and the solution requirements will drive this decision-making process. The choice for what type of **local planner** use is another decision that needs to be made by the robotics engineer. For most scenarios, a simple planner is preferred, as the process of checking an edge for collisions is repeated many times and efficiency is key. However, more powerful planners may be required in certain problems. In such a case, the local planner could even be another PRM. The [following](https://webspace.science.uu.nl/~gerae101/pdf/compare.pdf) link discusses several alternative strategies for implementing a PRM that may produce a more optimal path in a more efficient manner. 
+
+The Learning Phase takes significantly longer to implement than the Query Phase, which only has to connect the start and goal nodes, and then search for a path. However, the graph created by the Learning Phase can be reused for many subsequent queries. For this reason, PRM is called a multi-query planner. This is very beneficial in static or mildly-changing environments. However, some environments change so quickly that PRM’s multi-query property cannot be exploited. In such situations, PRM’s additional detail and computational slow nature is not appreciated. A quicker algorithm would be preferred - one that doesn’t spend time going in all directions without influence by the start and goal.
 
 ### Rapidly Exploring Random Tree Method
 
