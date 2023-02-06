@@ -1,4 +1,4 @@
-# PathPlanning_Classics (This repo is under construction)
+# PathPlanning_Classics (This repo is under construction see rub.de/mas for more info)
 **Goal:** The path planning and graph search algorithms
 
 ## Background study
